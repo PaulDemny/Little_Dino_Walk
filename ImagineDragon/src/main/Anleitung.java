@@ -18,6 +18,7 @@ public class Anleitung extends javax.swing.JFrame {
 
     private pictures.ImageLoader loader;
     private music.MP3Player player;
+    
     /**
      * Creates new form Anleitung
      */

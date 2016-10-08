@@ -24,6 +24,7 @@ public class Game extends javax.swing.JFrame {
      */
     public Game() {
         this.setResizable(false);
+        this.setIgnoreRepaint(true);
         initComponents();
         this.setSize(1500, 1000);
         painting =  new GamePanel();
@@ -34,17 +35,18 @@ public class Game extends javax.swing.JFrame {
         player.play();
         this.addKeyListener(new KeyAdapter(){
             
+            /**
+             * 
+             * @param e 
+             */
             @Override
             public void keyPressed(KeyEvent e) {
                 
                 if (e.getKeyCode() == KeyEvent.VK_ESCAPE){
                     player.stop();
-//                    setVisible(false);
-//                    Menue menue = new Menue();
-//                    menue.setVisible(true);
-             
-                        
-             
+                    setVisible(false);
+                    Menue menue = new Menue();
+                    menue.setVisible(true);
                 }
                 
                 if (e.getKeyCode() == KeyEvent.VK_LEFT){
@@ -67,7 +69,11 @@ public class Game extends javax.swing.JFrame {
                     painting.startTimer();
                 }
             }
-
+            
+            /**
+             * 
+             * @param e 
+             */
             @Override
             public void keyReleased(KeyEvent e) {
                 if (e.getKeyCode() == KeyEvent.VK_LEFT || e.getKeyCode() == KeyEvent.VK_RIGHT){

@@ -7,15 +7,12 @@ package main;
 
 import java.awt.Graphics;
 import java.awt.Graphics2D;
-import java.awt.Image;
 import java.awt.RenderingHints;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.io.InputStream;
 import java.util.List;
 import javax.swing.Timer;
 import java.util.TimerTask;
-import javax.imageio.ImageIO;
 import javax.swing.ImageIcon;
 import javax.swing.JPanel;
 import pictures.Pictures;
@@ -38,14 +35,13 @@ public class GamePanel extends JPanel implements ActionListener{
         manager = model.Manager.getInstance();
         loader = pictures.ImageLoader.getInstance();
         gameTime = new Timer(5, this);
+        gameTime.start();
         actionFlag = false;
         this.setSize(1500, 1000);
         this.setDoubleBuffered(true);
-        this.getIgnoreRepaint();
+        this.setIgnoreRepaint(true);
     }
 
-     
-   
     @Override
     public void paintComponent(Graphics graph) {
         super.paintComponent(graph);
@@ -59,9 +55,8 @@ public class GamePanel extends JPanel implements ActionListener{
         for (int i = 0; i < enemies.size(); i++){
             plainMdl.drawImage(loader.getImage(enemies.get(i).getImage()), enemies.get(i).getRect().x, enemies.get(i).getRect().y, null);
         }
-        
     }
-    
+
     public void stopTimer(){
         if (actionFlag){
         }

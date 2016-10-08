@@ -15,12 +15,22 @@ import java.awt.Rectangle;
 abstract class Enemy extends Figures{
   
     protected int velocity;
-    
+
+    /**
+     * 
+     * @param rect
+     * @param velocity
+     * @param img 
+     */
     public Enemy(Rectangle rect, int velocity, pictures.Pictures img) {
         super(rect, img);
         this.velocity = velocity;
     }
-    
+
+    /**
+     * 
+     * @param direction 
+     */
     @Override
     public void move(int direction){
         rect.x -= velocity;

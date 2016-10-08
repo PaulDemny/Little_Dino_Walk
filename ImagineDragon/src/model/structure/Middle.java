@@ -13,7 +13,13 @@ import java.awt.Rectangle;
  * @author Paul
  */
 class Middle extends Enemy{
-    
+
+    /**
+     * 
+     * @param rect
+     * @param velocity
+     * @param img 
+     */
     public Middle(Rectangle rect, int velocity, pictures.Pictures img) {
         super(rect, velocity, img);
     }

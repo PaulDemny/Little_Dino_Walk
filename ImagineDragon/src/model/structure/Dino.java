@@ -17,14 +17,20 @@ public class Dino extends Figures{
     private Thread walking;
     private boolean zenit;
     private boolean movement;
- 
+
+
+    /**
+     * 
+     * @param rect
+     * @param img 
+     */
     public Dino(Rectangle rect, pictures.Pictures img) {
         super(rect, img);
         this.dinoVelocity = 0;
         this.walking = new Thread(){
             @Override
             public void run() {
-                while (movement) {                    
+                while (movement) {
                     if (dinoVelocity < 0){
                         if (rect.x > 0){
                             rect.x += dinoVelocity;
@@ -48,11 +54,17 @@ public class Dino extends Figures{
         walking.start();
         zenit = false;
     }
-    
+
+    /**
+     * 
+     */
     public void killDino(){
         this.movement = false;
     }
-    
+
+    /**
+     * 
+     */
     private void task(){
         if(rect.y > 200){
             rect.y -= 10;
@@ -62,14 +74,20 @@ public class Dino extends Figures{
             zenit = true;
         }
     }
-        
+
+    /**
+     * 
+     * @param direction 
+     */
     @Override
     public void move(int direction) {
         dinoVelocity = direction;
     }
-    
+
+    /**
+     * 
+     */
     public void jump(){
-        
         this.jump = new Thread(){
             @Override
             public void run() {

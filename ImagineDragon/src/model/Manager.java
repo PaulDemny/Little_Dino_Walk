@@ -20,7 +20,7 @@ import pictures.Pictures;
  * @author Paul
  */
 public class Manager {
-    
+
     private static model.Manager manager = new model.Manager();
     private model.structure.FigureFactory factory;
     private pictures.ImageLoader loader;
@@ -39,10 +39,16 @@ public class Manager {
     private boolean kolissionFlag;
     private volatile boolean delayFlag;
 
+    /**
+     * 
+     */
     private Manager(){
         init();
     }    
-    
+
+    /**
+     * 
+     */
     private void init(){
         this.factory         = model.structure.FigureFactory.getInstance();
         this.loader          = pictures.ImageLoader.getInstance();
@@ -72,29 +78,45 @@ public class Manager {
         } ;
         this.start();
     }
-    
+
+    /**
+     * 
+     * @return 
+     */
     public static model.Manager getInstance(){
         return manager;
     }
-    
+
+    /**
+     * 
+     */
     public void start(){
       this.managerTime.scheduleAtFixedRate(task, 0, intervallCreate);
       this.enemyTime.scheduleAtFixedRate(passsive, 0, gameVelocity * 100);
     }
-    
+
+    /**
+     * 
+     */
     public void stop(){
         
     }
-    
+
+    /**
+     * 
+     */
     private void factEnemies(){
         Random rnd = new Random();
         switch(rnd.nextInt(20)){
             case 2: case 18:
-                enemies.add(factory.factFigure(Names.Middle, gameVelocity));
+                enemies.add(factory.factFigure(Names.Small, gameVelocity));
                 break;
         }
     }
-    
+
+    /**
+     * 
+     */
     private void move(){
         
         for (int i = 0; i < enemies.size(); i++){
@@ -114,15 +136,26 @@ public class Manager {
         
         backRect.x  -= gameVelocity;
     }
-    
+
+    /**
+     * 
+     * @return 
+     */
     public model.structure.Dino getDino(){
         return dino;
     }
-    
+
+    /**
+     * 
+     * @return 
+     */
     public List <model.structure.Figures> getEnemies(){
          return enemies;
     }
-    
+
+    /**
+     * 
+     */
     public void forward(){
         dino.move(20);
     }
@@ -130,7 +163,10 @@ public class Manager {
     public void revers(){
         dino.move(-20);
     }
-    
+
+    /**
+     * 
+     */
     public void jump(){
         if(!delayFlag){
             this.delayFlag = true;
@@ -143,7 +179,11 @@ public class Manager {
             }, 500);
         }
     }
-    
+
+    /**
+     * 
+     * @return 
+     */
     public Rectangle getBackRect(){
         return backRect;
     }
@@ -157,6 +197,9 @@ public class Manager {
         
     }
 
+    /**
+     * 
+     */
     public void still() {
         dino.move(0);
     }

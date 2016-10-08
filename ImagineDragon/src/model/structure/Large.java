@@ -13,7 +13,13 @@ import java.awt.Rectangle;
  * @author Paul
  */
 class Large extends Enemy{
-    
+
+    /**
+     * 
+     * @param rect
+     * @param velocity
+     * @param img 
+     */
     public Large(Rectangle rect, int velocity, pictures.Pictures img) {
         super(rect, velocity, img);
     }  

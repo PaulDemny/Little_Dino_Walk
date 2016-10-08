@@ -14,6 +14,12 @@ import java.awt.Rectangle;
  */
 class Small extends Enemy{
 
+    /**
+     * 
+     * @param rect
+     * @param velocity
+     * @param img 
+     */
     public Small(Rectangle rect, int velocity, pictures.Pictures img) {
         super(rect, velocity, img);
     }

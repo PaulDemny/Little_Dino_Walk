@@ -107,7 +107,9 @@ public class Menue extends javax.swing.JFrame implements ActionListener{
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    
+    /**
+     *  
+     */
     public void init(){
         icon = loader.getImageIcon(Pictures.Menue);
         dino = new JLabel(icon);
@@ -164,6 +166,10 @@ public class Menue extends javax.swing.JFrame implements ActionListener{
     private javax.swing.JButton spielen;
     // End of variables declaration//GEN-END:variables
 
+    /**
+     * 
+     * @param e 
+     */
     @Override
     public void actionPerformed(ActionEvent e) {
         if (e.getSource() == anleitung){

@@ -14,6 +14,12 @@ import java.awt.Rectangle;
  */
 class AntiDino extends Enemy{
 
+    /**
+     * 
+     * @param rect
+     * @param velocity
+     * @param img 
+     */
     public AntiDino(Rectangle rect, int velocity, pictures.Pictures img){
         super(rect, velocity, img);
     }

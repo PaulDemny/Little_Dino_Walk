@@ -10,8 +10,11 @@ package model.structure;
  * @author Paul
  */
 public interface IMovable {
-    
-    
+
+    /**
+     * 
+     * @param direction 
+     */
     void move(int direction);
     
 }
