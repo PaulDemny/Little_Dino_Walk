@@ -38,6 +38,7 @@ public class Manager {
     private int level;
     private boolean kolissionFlag;
     private volatile boolean delayFlag;
+    private Random rnd;
 
     /**
      * 
@@ -52,6 +53,7 @@ public class Manager {
     private void init(){
         this.factory         = model.structure.FigureFactory.getInstance();
         this.loader          = pictures.ImageLoader.getInstance();
+        this.rnd             = new Random();
         this.dino            = (Dino) factory.factFigure(Names.Names.Dino, gameVelocity);
         this.managerTime     = new Timer();
         this.enemyTime       = new Timer();
@@ -75,7 +77,7 @@ public class Manager {
             public void run() {
                 factEnemies();
             }
-        } ;
+        };
         this.start();
     }
 
@@ -106,11 +108,20 @@ public class Manager {
      * 
      */
     private void factEnemies(){
-        Random rnd = new Random();
-        switch(rnd.nextInt(20)){
-            case 2: case 18:
-                enemies.add(factory.factFigure(Names.Small, gameVelocity));
-                break;
+        if (this.level <= 5){
+            switch(rnd.nextInt(10)){
+                case 5:
+                    enemies.add(factory.factFigure(Names.Small, gameVelocity));
+                    break;
+            }
+        }
+        if(this.level <= 10){
+                switch(rnd.nextInt(20)){
+                }
+            }
+        if(this.level <= 15){
+                switch(rnd.nextInt(20)){
+                }
         }
     }
 
@@ -121,7 +132,7 @@ public class Manager {
         
         for (int i = 0; i < enemies.size(); i++){
             enemies.get(i).move(gameVelocity);
-            if(enemies.get(i).getRect().y < 300){
+            if(enemies.get(i).getRect().y < 500){
                 enemies.get(i).getRect().y += 5;
             }
         }
@@ -188,13 +199,14 @@ public class Manager {
         return backRect;
     }
     
-    private void kolission(){
+    private boolean kolission(){
+        boolean kollission = false;
         for (int i = 0; i < enemies.size(); i++){
             if(enemies.get(i).getRect().intersects(dino.getRect())){
-                return;
+                kollission = true;
             }
         }
-        
+        return kollission;
     }
 
     /**
@@ -202,5 +214,9 @@ public class Manager {
      */
     public void still() {
         dino.move(0);
+    }
+
+    public int getLevel() {
+        return this.level;
     }
 }
