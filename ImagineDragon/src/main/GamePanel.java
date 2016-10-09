@@ -38,7 +38,7 @@ public class GamePanel extends JPanel implements ActionListener{
     public GamePanel(){
         manager = model.Manager.getInstance();
         loader = pictures.ImageLoader.getInstance();
-        gameTime = new Timer(5, this);
+        gameTime = new Timer(30, this);
         gameTime.start();
         actionFlag = false;
         this.setSize(1500, 1000);

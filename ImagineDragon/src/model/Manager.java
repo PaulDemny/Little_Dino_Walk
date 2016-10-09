@@ -94,7 +94,7 @@ public class Manager {
      */
     public void start(){
       this.managerTime.scheduleAtFixedRate(task, 0, intervallCreate);
-      this.enemyTime.scheduleAtFixedRate(passsive, 0, gameVelocity * 100);
+      this.enemyTime.scheduleAtFixedRate(passsive, 0, gameVelocity * 200);
     }
 
     /**
@@ -116,11 +116,17 @@ public class Manager {
             }
         }
         if(this.level <= 10){
-                switch(rnd.nextInt(20)){
+            switch(rnd.nextInt(50)){
+                case 5:
+                    enemies.add(factory.factFigure(Names.Middle, gameVelocity));
+                    break;
                 }
             }
         if(this.level <= 15){
-                switch(rnd.nextInt(20)){
+            switch(rnd.nextInt(20)){
+                case 5:
+                    enemies.add(factory.factFigure(Names.Large, gameVelocity));
+                    break;
                 }
         }
     }
