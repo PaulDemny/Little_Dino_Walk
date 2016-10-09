@@ -10,6 +10,7 @@ import javax.swing.JLabel;
 import pictures.ImageLoader;
 import pictures.Pictures;
 import java.sql.*;
+import music.MP3Player;
 
 /**
  *
@@ -36,6 +37,8 @@ public class Highscore extends javax.swing.JFrame {
         this.setSize(1500, 1000);
         this.setResizable(false);
         this.setContentPane(new JLabel(new ImageIcon(loader.getImage(Pictures.Normal))));
+        this.player = new MP3Player("music/files/Gold.mp3");
+        this.player.play();
     }
 
     /**

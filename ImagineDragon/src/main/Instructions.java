@@ -7,6 +7,7 @@ package main;
 
 import javax.swing.ImageIcon;
 import javax.swing.JLabel;
+import music.MP3Player;
 import pictures.ImageLoader;
 import pictures.Pictures;
 
@@ -28,6 +29,12 @@ public class Instructions extends javax.swing.JFrame {
         this.setResizable(false);
         initComponents();
         this.setSize(1500, 1000);
+        this.init();
+    }
+    
+    public void init(){
+        this.player = new MP3Player("music/files/Cambalache.mp3");
+        this.player.play();
     }
 
     /**
