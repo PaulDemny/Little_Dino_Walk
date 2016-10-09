@@ -25,7 +25,6 @@ import pictures.Pictures;
 public class GamePanel extends JPanel implements ActionListener{
     
     private Timer gameTime;
-    private TimerTask action;
     private ImageIcon icon;
     private model.structure.Dino dino;
     private model.Manager manager;
