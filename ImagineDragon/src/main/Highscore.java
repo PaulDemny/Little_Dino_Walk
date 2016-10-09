@@ -10,6 +10,8 @@ import javax.swing.JLabel;
 import pictures.ImageLoader;
 import pictures.Pictures;
 import java.sql.*;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import music.MP3Player;
 
 /**
@@ -22,6 +24,8 @@ public class Highscore extends javax.swing.JFrame {
     private music.MP3Player player;
     private Connection connect;
     private Statement order;
+    private String statement;
+    private ResultSet result;
 
     /**
      * Creates new form Highscore
@@ -33,12 +37,26 @@ public class Highscore extends javax.swing.JFrame {
     }
     
     private void init(){
+        statement = null;
+        result = null;
         this.loader = ImageLoader.getInstance();
         this.setSize(1500, 1000);
         this.setResizable(false);
         this.setContentPane(new JLabel(new ImageIcon(loader.getImage(Pictures.Normal))));
         this.player = new MP3Player("music/files/Gold.mp3");
         this.player.play();
+        connect = null;
+        order = null;
+        try{
+            Class.forName("org.sqlite.JDBC");
+            connect = DriverManager.getConnection("jdbc:sqlite:Memory.db");
+            order = connect.createStatement();
+            statement = "SELECT * FROM Memory order by Score desc";
+            result = order.executeQuery(statement);
+        }   
+        catch (Exception ex) {
+            Logger.getLogger(Highscore.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 
     /**
@@ -55,11 +73,6 @@ public class Highscore extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
         jButton1.setText("jButton1");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
-            }
-        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -80,12 +93,6 @@ public class Highscore extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        Menue menue = new Menue();
-        menue.setVisible(true);
-        this.dispose();
-    }//GEN-LAST:event_jButton1ActionPerformed
 
     /**
      * @param args the command line arguments
