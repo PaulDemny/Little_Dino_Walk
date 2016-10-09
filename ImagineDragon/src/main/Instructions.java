@@ -14,7 +14,7 @@ import pictures.Pictures;
  *
  * @author Paul
  */
-public class Anleitung extends javax.swing.JFrame {
+public class Instructions extends javax.swing.JFrame {
 
     private pictures.ImageLoader loader;
     private music.MP3Player player;
@@ -22,7 +22,7 @@ public class Anleitung extends javax.swing.JFrame {
     /**
      * Creates new form Anleitung
      */
-    public Anleitung() {
+    public Instructions() {
         this.loader = ImageLoader.getInstance();
         this.setContentPane(new JLabel(new ImageIcon(loader.getImage(Pictures.Normal))));
         this.setResizable(false);
@@ -72,20 +72,23 @@ public class Anleitung extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(Anleitung.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(Instructions.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(Anleitung.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(Instructions.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(Anleitung.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(Instructions.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(Anleitung.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(Instructions.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
         //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new Anleitung().setVisible(true);
+                new Instructions().setVisible(true);
             }
         });
     }

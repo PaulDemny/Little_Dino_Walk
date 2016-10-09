@@ -30,12 +30,13 @@ public class Menue extends javax.swing.JFrame implements ActionListener{
      * Creates new form Menue
      */
     public Menue() {
-        loader = pictures.ImageLoader.getInstance();
-        this.setResizable(false);
-        this.setContentPane(new JLabel(new ImageIcon(loader.getImage(Pictures.Normal))));
-        initComponents();
+        this.setUndecorated(true);
         this.setSize(1500, 1000);
-        init();
+        this.setResizable(false);
+        this.loader = pictures.ImageLoader.getInstance();
+        this.setContentPane(new JLabel(new ImageIcon(loader.getImage(Pictures.Normal))));
+        this.initComponents();
+        this.init();
     }
 
     /**
@@ -111,6 +112,7 @@ public class Menue extends javax.swing.JFrame implements ActionListener{
      *  
      */
     public void init(){
+        this.loader = pictures.ImageLoader.getInstance();
         icon = loader.getImageIcon(Pictures.Menue);
         dino = new JLabel(icon);
         dino.setBounds(100, 500, icon.getIconWidth(), icon.getIconHeight());
@@ -173,7 +175,7 @@ public class Menue extends javax.swing.JFrame implements ActionListener{
     @Override
     public void actionPerformed(ActionEvent e) {
         if (e.getSource() == anleitung){
-            Anleitung anleitung = new Anleitung();
+            Instructions anleitung = new Instructions();
             player.stop();
             this.setVisible(false);
             anleitung.setVisible(true);            
@@ -190,7 +192,7 @@ public class Menue extends javax.swing.JFrame implements ActionListener{
             Highscore score = new Highscore();
             player.stop();
             this.setVisible(false);
-            score.setVisible(true);        
+            score.setVisible(true);
         }
         
         if (e.getSource() == schließen){

@@ -9,6 +9,7 @@ import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 import pictures.ImageLoader;
 import pictures.Pictures;
+import java.sql.*;
 
 /**
  *
@@ -17,16 +18,24 @@ import pictures.Pictures;
 public class Highscore extends javax.swing.JFrame {
     
     private pictures.ImageLoader loader;
+    private music.MP3Player player;
+    private Connection connect;
+    private Statement order;
 
     /**
      * Creates new form Highscore
      */
     public Highscore() {
-        loader = ImageLoader.getInstance();
+        this.setUndecorated(true);
+        this.initComponents();
+        this.init();
+    }
+    
+    private void init(){
+        this.loader = ImageLoader.getInstance();
+        this.setSize(1500, 1000);
         this.setResizable(false);
         this.setContentPane(new JLabel(new ImageIcon(loader.getImage(Pictures.Normal))));
-        initComponents();
-        this.setSize(1500, 1000);
     }
 
     /**
