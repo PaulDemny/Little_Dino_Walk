@@ -58,8 +58,8 @@ public class Manager {
         this.managerTime     = new Timer();
         this.enemyTime       = new Timer();
         this.delayJump       = new Timer();
-        this.gameVelocity    = 3;
-        this.intervallCreate = 5;
+        this.gameVelocity    = 15;
+        this.intervallCreate = 30;
         this.enemies         = new ArrayList <>();
         this.level           = 1;
         this.kolissionFlag   = false;
@@ -94,7 +94,7 @@ public class Manager {
      */
     public void start(){
       this.managerTime.scheduleAtFixedRate(task, 0, intervallCreate);
-      this.enemyTime.scheduleAtFixedRate(passsive, 0, gameVelocity * 200);
+      this.enemyTime.scheduleAtFixedRate(passsive, 0, intervallCreate * 33);
     }
 
     /**
@@ -139,12 +139,12 @@ public class Manager {
         for (int i = 0; i < enemies.size(); i++){
             enemies.get(i).move(gameVelocity);
             if(enemies.get(i).getRect().y < 500){
-                enemies.get(i).getRect().y += 5;
+                enemies.get(i).getRect().y += gameVelocity * 2;
             }
         }
         
         if (dino.getRect().y < 800) {
-            dino.getRect().y += 5;
+            dino.getRect().y += gameVelocity * 2;
         }
         
         if (backRect.x <= -2500){
