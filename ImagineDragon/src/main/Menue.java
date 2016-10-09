@@ -173,7 +173,7 @@ public class Menue extends javax.swing.JFrame implements ActionListener{
     @Override
     public void actionPerformed(ActionEvent e) {
         if (e.getSource() == anleitung){
-            Anleitung anleitung = new Anleitung();
+            Instructions anleitung = new Instructions();
             player.stop();
             this.setVisible(false);
             anleitung.setVisible(true);            
