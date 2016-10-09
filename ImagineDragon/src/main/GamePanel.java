@@ -5,7 +5,6 @@
  */
 package main;
 
-import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.RenderingHints;
@@ -25,19 +24,17 @@ import pictures.Pictures;
 public class GamePanel extends JPanel implements ActionListener{
     
     private Timer gameTime;
+    private TimerTask action;
     private ImageIcon icon;
     private model.structure.Dino dino;
     private model.Manager manager;
     private pictures.ImageLoader loader;
     private boolean actionFlag;
-
-    /**
-     * 
-     */
+    
     public GamePanel(){
         manager = model.Manager.getInstance();
         loader = pictures.ImageLoader.getInstance();
-        gameTime = new Timer(30, this);
+        gameTime = new Timer(5, this);
         gameTime.start();
         actionFlag = false;
         this.setSize(1500, 1000);
@@ -45,10 +42,6 @@ public class GamePanel extends JPanel implements ActionListener{
         this.setIgnoreRepaint(true);
     }
 
-    /**
-     * 
-     * @param graph 
-     */
     @Override
     public void paintComponent(Graphics graph) {
         super.paintComponent(graph);
@@ -62,42 +55,30 @@ public class GamePanel extends JPanel implements ActionListener{
         for (int i = 0; i < enemies.size(); i++){
             plainMdl.drawImage(loader.getImage(enemies.get(i).getImage()), enemies.get(i).getRect().x, enemies.get(i).getRect().y, null);
         }
-        plainMdl.setFont(new Font(Font.SERIF, Font.BOLD, 30));
-        plainMdl.drawString("Level: " + String.valueOf(manager.getLevel()), 30, 30);
-   }
+    }
 
-    /**
-     * 
-     */
     public void stopTimer(){
         if (actionFlag){
         }
     }
-
-    /**
-     * 
-     */
+    
     public void startTimer(){
         if (!actionFlag){
             
         }
     }
 
-    /**
-     * 
-     * @param e 
-     */
     @Override
     public void actionPerformed(ActionEvent e) {
         repaint();
     }
 
-    /**
-     * 
-     * @param g 
-     */
     @Override
     public void update(Graphics g) {
         paint(g);
     }
+    
+    
+    
+    
 }

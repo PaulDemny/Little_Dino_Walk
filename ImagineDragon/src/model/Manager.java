@@ -117,14 +117,14 @@ public class Manager {
         }
         if(this.level <= 10){
             switch(rnd.nextInt(50)){
-                case 5:
+                case 25:
                     enemies.add(factory.factFigure(Names.Middle, gameVelocity));
                     break;
                 }
             }
         if(this.level <= 15){
-            switch(rnd.nextInt(20)){
-                case 5:
+            switch(rnd.nextInt(100)){
+                case 50:
                     enemies.add(factory.factFigure(Names.Large, gameVelocity));
                     break;
                 }
