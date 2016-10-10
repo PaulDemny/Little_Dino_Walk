@@ -28,6 +28,7 @@ import model.Manager;
 public class GamePanel extends JPanel implements ActionListener, IObserver{
     
     private Timer gameTime;
+    private TimerTask action;
     private ImageIcon icon;
     private Dino dino;
     private Manager manager;
@@ -58,10 +59,6 @@ public class GamePanel extends JPanel implements ActionListener, IObserver{
         this.update();
     }
 
-    /**
-     * 
-     * @param graph 
-     */
     @Override
     public void paintComponent(Graphics graph) {
         super.paintComponent(graph);
@@ -79,36 +76,22 @@ public class GamePanel extends JPanel implements ActionListener, IObserver{
         plainMdl.drawString("Score: " + String.valueOf(this.score), 300, 50);
    }
 
-    /**
-     * 
-     */
     public void stopTimer(){
         if (actionFlag){
         }
     }
-
-    /**
-     * 
-     */
+    
     public void startTimer(){
         if (!actionFlag){
             
         }
     }
 
-    /**
-     * 
-     * @param e 
-     */
     @Override
     public void actionPerformed(ActionEvent e) {
         repaint();
     }
 
-    /**
-     * 
-     * @param g 
-     */
     @Override
     public void update(Graphics g) {
         paint(g);
