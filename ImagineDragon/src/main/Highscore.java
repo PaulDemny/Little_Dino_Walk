@@ -26,6 +26,8 @@ public class Highscore extends javax.swing.JFrame {
     private Statement order;
     private String statement;
     private ResultSet result;
+    private String output;
+    private byte place;
 
     /**
      * Creates new form Highscore
@@ -37,22 +39,28 @@ public class Highscore extends javax.swing.JFrame {
     }
     
     private void init(){
-        statement = null;
-        result = null;
+        this.statement = null;
+        this.result = null;
+        this.output = null;
+        this.place = 1;
         this.loader = ImageLoader.getInstance();
         this.setSize(1500, 1000);
         this.setResizable(false);
         this.setContentPane(new JLabel(new ImageIcon(loader.getImage(Pictures.Normal))));
         this.player = new MP3Player("music/files/Gold.mp3");
         this.player.play();
-        connect = null;
-        order = null;
+        this.connect = null;
+        this.order = null;
         try{
             Class.forName("org.sqlite.JDBC");
-            connect = DriverManager.getConnection("jdbc:sqlite:Memory.db");
-            order = connect.createStatement();
-            statement = "SELECT * FROM Memory order by Score desc";
-            result = order.executeQuery(statement);
+            this.connect = DriverManager.getConnection("jdbc:sqlite:Memory.db");
+            this.order = connect.createStatement();
+            this.statement = "SELECT * FROM Memory order by Score desc";
+            this.result = order.executeQuery(statement);
+            while (this.result.next()){
+                this.output += String.valueOf(this.place) + ". Name: " + this.result.getString("Name") + "\t\t " ;
+            }
+            
         }   
         catch (Exception ex) {
             Logger.getLogger(Highscore.class.getName()).log(Level.SEVERE, null, ex);
