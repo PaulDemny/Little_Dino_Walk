@@ -18,14 +18,12 @@ public class FigureFactory {
     private static FigureFactory figureFactory = new FigureFactory();
     private Figures newfig;
     private pictures.ImageLoader loader;
-    private Random rnd;
 
     /**
      * 
      */
     private FigureFactory(){
         loader = pictures.ImageLoader.getInstance();
-        rnd = new Random();
     }
 
     /**
