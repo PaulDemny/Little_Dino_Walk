@@ -30,10 +30,10 @@ public class Menue extends javax.swing.JFrame implements ActionListener{
      * Creates new form Menue
      */
     public Menue() {
+        this.loader = pictures.ImageLoader.getInstance();
         this.setUndecorated(true);
         this.setSize(1500, 1000);
         this.setResizable(false);
-        this.setUndecorated(true);
         this.setContentPane(new JLabel(new ImageIcon(loader.getImage(Pictures.Normal))));
         this.initComponents();
         this.init();
