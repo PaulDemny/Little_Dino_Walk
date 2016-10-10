@@ -9,6 +9,10 @@ import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 import pictures.ImageLoader;
 import pictures.Pictures;
+import java.sql.*;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import music.MP3Player;
 
 /**
  *
@@ -17,16 +21,50 @@ import pictures.Pictures;
 public class Highscore extends javax.swing.JFrame {
     
     private pictures.ImageLoader loader;
+    private music.MP3Player player;
+    private Connection connect;
+    private Statement order;
+    private String statement;
+    private ResultSet result;
+    private String output;
+    private byte place;
 
     /**
      * Creates new form Highscore
      */
     public Highscore() {
-        loader = ImageLoader.getInstance();
+        this.setUndecorated(true);
+        this.initComponents();
+        this.init();
+    }
+    
+    private void init(){
+        this.statement = null;
+        this.result = null;
+        this.output = null;
+        this.place = 1;
+        this.loader = ImageLoader.getInstance();
+        this.setSize(1500, 1000);
         this.setResizable(false);
         this.setContentPane(new JLabel(new ImageIcon(loader.getImage(Pictures.Normal))));
-        initComponents();
-        this.setSize(1500, 1000);
+        this.player = new MP3Player("music/files/Gold.mp3");
+        this.player.play();
+        this.connect = null;
+        this.order = null;
+        try{
+            Class.forName("org.sqlite.JDBC");
+            this.connect = DriverManager.getConnection("jdbc:sqlite:Memory.db");
+            this.order = connect.createStatement();
+            this.statement = "SELECT * FROM Memory order by Score desc";
+            this.result = order.executeQuery(statement);
+            while (this.result.next()){
+                this.output += String.valueOf(this.place) + ". Name: " + this.result.getString("Name") + "\t\t " ;
+            }
+            
+        }   
+        catch (Exception ex) {
+            Logger.getLogger(Highscore.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 
     /**
@@ -43,11 +81,6 @@ public class Highscore extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
         jButton1.setText("jButton1");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
-            }
-        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -68,12 +101,6 @@ public class Highscore extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        Menue menue = new Menue();
-        menue.setVisible(true);
-        this.dispose();
-    }//GEN-LAST:event_jButton1ActionPerformed
 
     /**
      * @param args the command line arguments
