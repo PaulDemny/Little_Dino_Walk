@@ -5,6 +5,7 @@
  */
 package main;
 
+import java.awt.Color;
 import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
@@ -13,28 +14,38 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.List;
 import javax.swing.Timer;
-import java.util.TimerTask;
 import javax.swing.ImageIcon;
 import javax.swing.JPanel;
+import model.structure.Dino;
+import model.structure.Figures;
 import pictures.Pictures;
+import model.Manager;
 
 /**
  *
  * @author Paul
  */
-public class GamePanel extends JPanel implements ActionListener{
+public class GamePanel extends JPanel implements ActionListener, IObserver{
     
     private Timer gameTime;
     private ImageIcon icon;
-    private model.structure.Dino dino;
-    private model.Manager manager;
+    private Dino dino;
+    private Manager manager;
     private pictures.ImageLoader loader;
     private boolean actionFlag;
-
+    private List <Figures> enemies;
+    private int level;
+    private int score;
+    
+    
     /**
      * 
      */
     public GamePanel(){
+        this.init();
+    }
+    
+    private void init(){
         this.manager = model.Manager.getInstance();
         this.loader = pictures.ImageLoader.getInstance();
         this.gameTime = new Timer(30, this);
@@ -43,6 +54,8 @@ public class GamePanel extends JPanel implements ActionListener{
         this.setSize(1500, 1000);
         this.setDoubleBuffered(true);
         this.setIgnoreRepaint(true);
+        this.manager.attach(this);
+        this.update();
     }
 
     /**
@@ -54,16 +67,16 @@ public class GamePanel extends JPanel implements ActionListener{
         super.paintComponent(graph);
         Graphics2D plainMdl = (Graphics2D) graph;
         plainMdl.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
-        dino = this.manager.getDino();
-        List <model.structure.Figures> enemies = this.manager.getEnemies();
         plainMdl.drawImage(loader.getImage(Pictures.Desert), manager.getBackRect().x, manager.getBackRect().y, null);
         icon = loader.getImageIcon(Pictures.Dino);
         icon.paintIcon(this, plainMdl, dino.getRect().x, dino.getRect().y);
         for (int i = 0; i < enemies.size(); i++){
             plainMdl.drawImage(loader.getImage(enemies.get(i).getImage()), enemies.get(i).getRect().x, enemies.get(i).getRect().y, null);
         }
-        plainMdl.setFont(new Font(Font.SERIF, Font.BOLD, 30));
-        plainMdl.drawString("Level: " + String.valueOf(manager.getLevel()), 30, 30);
+        plainMdl.setFont(new Font(Font.SERIF, Font.BOLD, 50));
+        plainMdl.setColor(Color.red);
+        plainMdl.drawString("Level: " + String.valueOf(this.level), 20, 50);
+        plainMdl.drawString("Score: " + String.valueOf(this.score), 300, 50);
    }
 
     /**
@@ -99,5 +112,13 @@ public class GamePanel extends JPanel implements ActionListener{
     @Override
     public void update(Graphics g) {
         paint(g);
+    }
+
+    @Override
+    public void update() {
+        this.level = this.manager.getLevel();
+        this.score = this.manager.getScore();
+        this.dino = this.manager.getDino();
+        this.enemies = this.manager.getEnemies();
     }
 }

@@ -23,16 +23,17 @@ public class Game extends javax.swing.JFrame {
      * Creates new form Game
      */
     public Game() {
+        this.setUndecorated(true);
         this.setResizable(false);
         this.setIgnoreRepaint(true);
-        initComponents();
+        this.initComponents();
         this.setSize(1500, 1000);
-        painting =  new GamePanel();
+        this.painting =  new GamePanel();
         this.add(painting);
-        manager = model.Manager.getInstance();
-        player = new music.MP3Player("music/files/Miles.mp3");
-        painting = new GamePanel();
-        player.play();
+        this.manager = model.Manager.getInstance();
+        this.player = new music.MP3Player("music/files/Miles.mp3");
+        this.painting = new GamePanel();
+        this.player.play();
         this.addKeyListener(new KeyAdapter(){
             
             /**
@@ -78,6 +79,9 @@ public class Game extends javax.swing.JFrame {
             public void keyReleased(KeyEvent e) {
                 if (e.getKeyCode() == KeyEvent.VK_LEFT || e.getKeyCode() == KeyEvent.VK_RIGHT){
                     manager.still();
+                }
+                if(e.getKeyCode() == KeyEvent.VK_SPACE){
+                    manager.quitJump();
                 }
             }
             
@@ -142,7 +146,6 @@ public class Game extends javax.swing.JFrame {
             new Game().setVisible(true);
         });
     }
-
     // Variables declaration - do not modify//GEN-BEGIN:variables
     // End of variables declaration//GEN-END:variables
 }

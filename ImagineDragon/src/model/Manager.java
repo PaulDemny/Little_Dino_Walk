@@ -11,6 +11,7 @@ import java.util.List;
 import java.util.ArrayList;
 import java.util.Random;
 import java.util.TimerTask;
+import main.IObserver;
 import model.structure.Names;
 import model.structure.Dino;
 import pictures.Pictures;
@@ -22,7 +23,7 @@ import model.structure.Figures;
  *
  * @author Paul
  */
-public class Manager {
+public class Manager{
 
     private static Manager manager = new Manager();
     private FigureFactory factory;
@@ -37,17 +38,21 @@ public class Manager {
     private int gameVelocity;
     private int intervallCreate;
     private List <Figures> enemies;
+    private List <IObserver> observers;
     private Rectangle backRect;
     private int level;
     private boolean kolissionFlag;
     private volatile boolean delayFlag;
     private Random rnd;
+    private int levelIncrement;
+    private int score;
 
     /**
      * 
      */
     private Manager(){
-        init();
+        
+        this.init();
     }    
 
     /**
@@ -57,14 +62,17 @@ public class Manager {
         this.factory         = model.structure.FigureFactory.getInstance();
         this.loader          = pictures.ImageLoader.getInstance();
         this.rnd             = new Random();
-        this.dino            = (Dino) factory.factFigure(Names.Names.Dino, gameVelocity);
+        this.dino            = (Dino) factory.factFigure(Names.Names.Dino, this.gameVelocity);
         this.managerTime     = new Timer();
         this.enemyTime       = new Timer();
         this.delayJump       = new Timer();
         this.gameVelocity    = 15;
         this.intervallCreate = 30;
         this.enemies         = new ArrayList <>();
+        this.observers       = new ArrayList <>();
         this.level           = 1;
+        this.levelIncrement  = 0;
+        this.score           = 0;
         this.kolissionFlag   = false;
         this.delayFlag       = false;
         this.backRect        = new Rectangle(0, 0, loader.getImage(Pictures.Desert).getWidth(null), loader.getImage(Pictures.Desert).getHeight(null));
@@ -89,15 +97,15 @@ public class Manager {
      * @return 
      */
     public static Manager getInstance(){
-        return manager;
+        return Manager.manager;
     }
 
     /**
      * 
      */
     public void start(){
-      this.managerTime.scheduleAtFixedRate(task, 0, intervallCreate);
-      this.enemyTime.scheduleAtFixedRate(passsive, 0, intervallCreate * 33);
+      this.managerTime.scheduleAtFixedRate(task, 0, this.intervallCreate);
+      this.enemyTime.scheduleAtFixedRate(passsive, 0, this.intervallCreate * 33);
     }
 
     /**
@@ -111,26 +119,34 @@ public class Manager {
      * 
      */
     private void factEnemies(){
-        if (this.level <= 5){
-            switch(rnd.nextInt(10)){
-                case 5:
-                    enemies.add(factory.factFigure(Names.Small, gameVelocity));
-                    break;
-            }
+        this.raiseLevelCheck();
+        switch(this.rnd.nextInt(10)){
+            case 5:
+                enemies.add(factory.factFigure(Names.Small, this.gameVelocity));
+                break;
         }
-        if(this.level <= 10){
-            switch(rnd.nextInt(50)){
+        if(this.level >= 10){
+            switch(this.rnd.nextInt(50)){
                 case 5:
-                    enemies.add(factory.factFigure(Names.Middle, gameVelocity));
+                    this.enemies.add(this.factory.factFigure(Names.Middle, this.gameVelocity));
                     break;
                 }
             }
-        if(this.level <= 15){
+        if(this.level >= 15){
             switch(rnd.nextInt(20)){
                 case 5:
-                    enemies.add(factory.factFigure(Names.Large, gameVelocity));
+                    this.enemies.add(this.factory.factFigure(Names.Large, this.gameVelocity));
                     break;
             }
+        }
+    }
+    
+    private void raiseLevelCheck(){
+        this.levelIncrement++;
+        if (this.levelIncrement > 60) {
+            this.level++;
+            this.gameVelocity++;
+            this.levelIncrement = 0;
         }
     }
 
@@ -138,19 +154,21 @@ public class Manager {
      * 
      */
     private void move(){
-        for (int i = 0; i < enemies.size(); i++){
-            enemies.get(i).move(gameVelocity);
-            if(enemies.get(i).getRect().y < 500){
-                enemies.get(i).getRect().y += gameVelocity * 2;
+        this.killEnemies();
+        this.notifyObservers();
+        for (int i = 0; i < this.enemies.size(); i++){
+            this.enemies.get(i).move(this.gameVelocity);
+            if(this.enemies.get(i).getRect().y < 500){
+                this.enemies.get(i).getRect().y += this.gameVelocity * 2;
             }
         }
-        if (dino.getRect().y < 800) {
-            dino.getRect().y += gameVelocity * 2;
+        if (this.dino.getRect().y < 780) {
+            this.dino.getRect().y += this.gameVelocity * 2;
         }
-        if (backRect.x <= -2500){
+        if (this.backRect.x <= -2500){
             this.backRect.setLocation(0, 0);
         }
-        backRect.x  -= gameVelocity;
+        this.backRect.x  -= this.gameVelocity;
     }
 
     /**
@@ -158,7 +176,7 @@ public class Manager {
      * @return 
      */
     public Dino getDino(){
-        return dino;
+        return this.dino;
     }
 
     /**
@@ -166,27 +184,27 @@ public class Manager {
      * @return 
      */
     public List <Figures> getEnemies(){
-         return enemies;
+         return this.enemies;
     }
 
     /**
      * 
      */
     public void forward(){
-        dino.move(20);
+        this.dino.move(20);
     }
     
     public void revers(){
-        dino.move(-20);
+        this.dino.move(-20);
     }
 
     /**
      * 
      */
     public void jump(){
-        if(!delayFlag){
+        if(!this.delayFlag){
             this.delayFlag = true;
-            dino.jump();
+            this.dino.jump();
             this.delayJump.schedule(new TimerTask(){
                 @Override
                 public void run() {
@@ -201,13 +219,13 @@ public class Manager {
      * @return 
      */
     public Rectangle getBackRect(){
-        return backRect;
+        return this.backRect;
     }
     
     private boolean kolission(){
         boolean kollission = false;
         for (int i = 0; i < enemies.size(); i++){
-            if(enemies.get(i).getRect().intersects(dino.getRect())){
+            if(this.enemies.get(i).getRect().intersects(this.dino.getRect())){
                 kollission = true;
             }
         }
@@ -218,10 +236,37 @@ public class Manager {
      * 
      */
     public void still() {
-        dino.move(0);
+        this.dino.move(0);
     }
 
     public int getLevel() {
         return this.level;
+    }
+
+    private void killEnemies(){
+        for(int i = 0; i < this.enemies.size(); i++){
+            if(this.enemies.get(i).getRect().x < -100){
+                this.score += 10;
+                this.enemies.remove(i);
+            }
+        }
+    }
+    
+    public void quitJump(){
+        this.dino.resetZenit();
+    }
+
+    public int getScore() {
+        return this.score;
+    }
+    
+    public void attach(IObserver observer){
+        this.observers.add(observer);
+    }
+    
+    private void notifyObservers(){
+        for (int i = 0; i < this.observers.size(); i++){
+            this.observers.get(i).update();
+        }
     }
 }

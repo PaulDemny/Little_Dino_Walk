@@ -18,7 +18,6 @@ public class Dino extends Figures{
     private boolean zenit;
     private boolean movement;
 
-
     /**
      * 
      * @param rect
@@ -50,9 +49,9 @@ public class Dino extends Figures{
                 }
             }
         };
-        movement = true;
-        walking.start();
-        zenit = false;
+        this.movement = true;
+        this.walking.start();
+        this.zenit = false;
     }
 
     /**
@@ -66,12 +65,12 @@ public class Dino extends Figures{
      * 
      */
     private void task(){
-        if(rect.y > 200){
-            rect.y -= 10;
-            zenit = false;
+        if(this.rect.y > 200){
+            this.rect.y -= 7;
+            this.zenit = false;
         }
         else{
-            zenit = true;
+            this.zenit = true;
         }
     }
 
@@ -81,7 +80,7 @@ public class Dino extends Figures{
      */
     @Override
     public void move(int direction) {
-        dinoVelocity = direction;
+        this.dinoVelocity = direction;
     }
 
     /**
@@ -104,6 +103,10 @@ public class Dino extends Figures{
             
         };
         jump.start();
-        zenit = false;
+        this.zenit = false;
+    }
+    
+    public void resetZenit(){
+        this.zenit = true;
     }
 }
