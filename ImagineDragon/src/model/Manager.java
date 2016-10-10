@@ -14,6 +14,10 @@ import java.util.TimerTask;
 import model.structure.Names;
 import model.structure.Dino;
 import pictures.Pictures;
+import model.Manager;
+import model.structure.FigureFactory;
+import pictures.ImageLoader;
+import model.structure.Figures;
 
 /**
  *
@@ -21,10 +25,10 @@ import pictures.Pictures;
  */
 public class Manager {
 
-    private static model.Manager manager = new model.Manager();
-    private model.structure.FigureFactory factory;
-    private pictures.ImageLoader loader;
-    private model.structure.Dino dino;
+    private static Manager manager = new Manager();
+    private FigureFactory factory;
+    private ImageLoader loader;
+    private Dino dino;
     private Timer managerTime;
     private Timer enemyTime;
     private Timer delayJump;
@@ -33,7 +37,7 @@ public class Manager {
     private TimerTask delay;
     private int gameVelocity;
     private int intervallCreate;
-    private List <model.structure.Figures> enemies;
+    private List <Figures> enemies;
     private Rectangle backRect;
     private int level;
     private boolean kolissionFlag;
@@ -50,9 +54,9 @@ public class Manager {
      * 
      */
     private void init(){
-        this.factory         = model.structure.FigureFactory.getInstance();
-        this.loader          = pictures.ImageLoader.getInstance();
-        this.dino            = (Dino) factory.factFigure(Names.Names.Dino, gameVelocity);
+        this.factory         = FigureFactory.getInstance();
+        this.loader          = ImageLoader.getInstance();
+        this.dino            = (Dino) factory.factFigure(Names.Dino, gameVelocity);
         this.managerTime     = new Timer();
         this.enemyTime       = new Timer();
         this.delayJump       = new Timer();
@@ -83,7 +87,7 @@ public class Manager {
      * 
      * @return 
      */
-    public static model.Manager getInstance(){
+    public static Manager getInstance(){
         return manager;
     }
 
@@ -141,7 +145,7 @@ public class Manager {
      * 
      * @return 
      */
-    public model.structure.Dino getDino(){
+    public Dino getDino(){
         return dino;
     }
 
@@ -149,7 +153,7 @@ public class Manager {
      * 
      * @return 
      */
-    public List <model.structure.Figures> getEnemies(){
+    public List <Figures> getEnemies(){
          return enemies;
     }
 
