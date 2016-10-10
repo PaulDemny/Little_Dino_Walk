@@ -35,7 +35,7 @@ public class Instructions extends javax.swing.JFrame implements ActionListener{
     }
     
     public void init(){
-        this.player = new MP3Player("music/files/Cambalache.mp3");
+        this.player = new MP3Player("music/files/Tango.mp3");
         this.player.play();
         this.close.addActionListener(this);
     }
@@ -50,10 +50,15 @@ public class Instructions extends javax.swing.JFrame implements ActionListener{
     private void initComponents() {
 
         close = new javax.swing.JButton();
+        jLabel1 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
         close.setText("Close");
+
+        jLabel1.setFont(new java.awt.Font("Wide Latin", 3, 60)); // NOI18N
+        jLabel1.setForeground(new java.awt.Color(0, 102, 0));
+        jLabel1.setText("INSTRUCTIONS");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -63,11 +68,17 @@ public class Instructions extends javax.swing.JFrame implements ActionListener{
                 .addContainerGap(1198, Short.MAX_VALUE)
                 .addComponent(close, javax.swing.GroupLayout.PREFERRED_SIZE, 250, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(53, 53, 53))
+            .addGroup(layout.createSequentialGroup()
+                .addGap(30, 30, 30)
+                .addComponent(jLabel1)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(891, Short.MAX_VALUE)
+                .addGap(31, 31, 31)
+                .addComponent(jLabel1)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 799, Short.MAX_VALUE)
                 .addComponent(close, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(37, 37, 37))
         );
@@ -115,6 +126,7 @@ public class Instructions extends javax.swing.JFrame implements ActionListener{
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton close;
+    private javax.swing.JLabel jLabel1;
     // End of variables declaration//GEN-END:variables
 
     @Override

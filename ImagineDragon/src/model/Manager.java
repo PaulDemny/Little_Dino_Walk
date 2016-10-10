@@ -14,7 +14,6 @@ import java.util.TimerTask;
 import model.structure.Names;
 import model.structure.Dino;
 import pictures.Pictures;
-import model.Manager;
 import model.structure.FigureFactory;
 import pictures.ImageLoader;
 import model.structure.Figures;
@@ -131,7 +130,7 @@ public class Manager {
                 case 5:
                     enemies.add(factory.factFigure(Names.Large, gameVelocity));
                     break;
-                }
+            }
         }
     }
 
@@ -139,22 +138,18 @@ public class Manager {
      * 
      */
     private void move(){
-        
         for (int i = 0; i < enemies.size(); i++){
             enemies.get(i).move(gameVelocity);
             if(enemies.get(i).getRect().y < 500){
                 enemies.get(i).getRect().y += gameVelocity * 2;
             }
         }
-        
         if (dino.getRect().y < 800) {
             dino.getRect().y += gameVelocity * 2;
         }
-        
         if (backRect.x <= -2500){
             this.backRect.setLocation(0, 0);
         }
-        
         backRect.x  -= gameVelocity;
     }
 

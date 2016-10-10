@@ -5,6 +5,8 @@
  */
 package main;
 
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 import pictures.ImageLoader;
@@ -18,7 +20,7 @@ import music.MP3Player;
  *
  * @author Paul
  */
-public class Highscore extends javax.swing.JFrame {
+public class Highscore extends javax.swing.JFrame implements ActionListener{
     
     private pictures.ImageLoader loader;
     private music.MP3Player player;
@@ -34,19 +36,20 @@ public class Highscore extends javax.swing.JFrame {
      */
     public Highscore() {
         this.setUndecorated(true);
+        this.loader = ImageLoader.getInstance();
+        this.setContentPane(new JLabel(new ImageIcon(loader.getImage(Pictures.Normal))));
         this.initComponents();
         this.init();
     }
     
     private void init(){
+        this.close.addActionListener(this);
         this.statement = null;
         this.result = null;
         this.output = null;
         this.place = 1;
-        this.loader = ImageLoader.getInstance();
         this.setSize(1500, 1000);
         this.setResizable(false);
-        this.setContentPane(new JLabel(new ImageIcon(loader.getImage(Pictures.Normal))));
         this.player = new MP3Player("music/files/Gold.mp3");
         this.player.play();
         this.connect = null;
@@ -58,7 +61,7 @@ public class Highscore extends javax.swing.JFrame {
             this.statement = "SELECT * FROM Memory order by Score desc";
             this.result = order.executeQuery(statement);
             while (this.result.next()){
-                this.output += String.valueOf(this.place) + ". Name: " + this.result.getString("Name") + "\t\t " ;
+                this.output += String.valueOf(this.place) + ". Name: " + this.result.getString("Name") + "\t\t" + String.valueOf(this.result.getInt("Level")) + "\t\t" + String.valueOf(this.result.getInt("Score"));
             }
             
         }   
@@ -76,27 +79,39 @@ public class Highscore extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jButton1 = new javax.swing.JButton();
+        close = new javax.swing.JButton();
+        jLabel1 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        jButton1.setText("jButton1");
+        close.setText("Close");
+        close.setBorderPainted(false);
+
+        jLabel1.setFont(new java.awt.Font("Wide Latin", 3, 60)); // NOI18N
+        jLabel1.setForeground(new java.awt.Color(0, 102, 0));
+        jLabel1.setText("Highscore");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(997, Short.MAX_VALUE)
-                .addComponent(jButton1)
-                .addGap(196, 196, 196))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(close, javax.swing.GroupLayout.PREFERRED_SIZE, 250, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(68, 68, 68))
+            .addGroup(layout.createSequentialGroup()
+                .addGap(37, 37, 37)
+                .addComponent(jLabel1)
+                .addContainerGap(909, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(441, Short.MAX_VALUE)
-                .addComponent(jButton1)
-                .addGap(62, 62, 62))
+                .addGap(44, 44, 44)
+                .addComponent(jLabel1)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 794, Short.MAX_VALUE)
+                .addComponent(close, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(29, 29, 29))
         );
 
         pack();
@@ -139,6 +154,17 @@ public class Highscore extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton1;
+    private javax.swing.JButton close;
+    private javax.swing.JLabel jLabel1;
     // End of variables declaration//GEN-END:variables
+
+    @Override
+    public void actionPerformed(ActionEvent e) {
+        if(e.getSource() == this.close){
+            this.player.stop();
+            this.setVisible(false);
+            Menue menue = new Menue();
+            menue.setVisible(true);
+        }
+    }
 }

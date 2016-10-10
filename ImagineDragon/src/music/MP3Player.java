@@ -19,7 +19,7 @@ public class MP3Player implements IPlayer{
     private final String filename;
     
     
-    public MP3Player(String filename) throws IllegalArgumentException{                
+    public MP3Player(String filename) throws IllegalArgumentException{
         this.filename = filename;
         InputStream instream = this.getClass().getClassLoader().getResourceAsStream(filename);
         try {
