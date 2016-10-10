@@ -5,8 +5,6 @@
  */
 package main;
 
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 import music.MP3Player;
@@ -17,7 +15,7 @@ import pictures.Pictures;
  *
  * @author Paul
  */
-public class Instructions extends javax.swing.JFrame implements ActionListener{
+public class Instructions extends javax.swing.JFrame {
 
     private pictures.ImageLoader loader;
     private music.MP3Player player;
@@ -26,20 +24,19 @@ public class Instructions extends javax.swing.JFrame implements ActionListener{
      * Creates new form Anleitung
      */
     public Instructions() {
-        loader = ImageLoader.getInstance();
+        this.loader = ImageLoader.getInstance();
         this.setContentPane(new JLabel(new ImageIcon(loader.getImage(Pictures.Normal))));
-        this.setUndecorated(true);
+        this.setResizable(false);
         initComponents();
+        this.setSize(1500, 1000);
         this.init();
     }
-
-    private void init(){
-        this.setSize(1500, 1000);
-        this.setResizable(false);
-        this.player = new MP3Player("music/files/Tango.mp3");
+    
+    public void init(){
+        this.player = new MP3Player("music/files/Cambalache.mp3");
         this.player.play();
-        this.close.addActionListener(this);
     }
+
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -49,28 +46,17 @@ public class Instructions extends javax.swing.JFrame implements ActionListener{
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        close = new javax.swing.JButton();
-
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setSize(new java.awt.Dimension(1500, 1000));
-
-        close.setText("Close");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(1222, Short.MAX_VALUE)
-                .addComponent(close, javax.swing.GroupLayout.PREFERRED_SIZE, 250, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(28, 28, 28))
+            .addGap(0, 1296, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(900, Short.MAX_VALUE)
-                .addComponent(close, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(24, 24, 24))
+            .addGap(0, 511, Short.MAX_VALUE)
         );
 
         pack();
@@ -103,6 +89,8 @@ public class Instructions extends javax.swing.JFrame implements ActionListener{
         }
         //</editor-fold>
         //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
@@ -113,16 +101,5 @@ public class Instructions extends javax.swing.JFrame implements ActionListener{
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton close;
     // End of variables declaration//GEN-END:variables
-
-    @Override
-    public void actionPerformed(ActionEvent e) {
-        if(e.getSource() == close){
-            this.player.stop();
-            this.setVisible(false);
-            Menue menue = new Menue();
-            menue.setVisible(true);
-        }
-    }
 }
