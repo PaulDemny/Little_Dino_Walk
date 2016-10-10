@@ -12,6 +12,7 @@ import java.awt.Graphics2D;
 import java.awt.RenderingHints;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.image.BufferStrategy;
 import java.util.List;
 import javax.swing.Timer;
 import javax.swing.ImageIcon;
@@ -20,6 +21,7 @@ import model.structure.Dino;
 import model.structure.Figures;
 import pictures.Pictures;
 import model.Manager;
+import pictures.ImageLoader;
 
 /**
  *
@@ -28,7 +30,6 @@ import model.Manager;
 public class GamePanel extends JPanel implements ActionListener, IObserver{
     
     private Timer gameTime;
-    private TimerTask action;
     private ImageIcon icon;
     private Dino dino;
     private Manager manager;
@@ -37,18 +38,19 @@ public class GamePanel extends JPanel implements ActionListener, IObserver{
     private List <Figures> enemies;
     private int level;
     private int score;
-    
+    private BufferStrategy buffer;
     
     /**
      * 
      */
-    public GamePanel(){
+    public GamePanel(BufferStrategy buffer){
+        this.buffer = buffer;
         this.init();
     }
     
     private void init(){
-        this.manager = model.Manager.getInstance();
-        this.loader = pictures.ImageLoader.getInstance();
+        this.manager = Manager.getInstance();
+        this.loader = ImageLoader.getInstance();
         this.gameTime = new Timer(30, this);
         this.gameTime.start();
         this.actionFlag = false;
@@ -86,7 +88,7 @@ public class GamePanel extends JPanel implements ActionListener, IObserver{
             
         }
     }
-
+    
     @Override
     public void actionPerformed(ActionEvent e) {
         repaint();

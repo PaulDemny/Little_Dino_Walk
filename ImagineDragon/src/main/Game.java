@@ -7,6 +7,7 @@ package main;
 
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
+import java.awt.image.BufferStrategy;
 
 
 /**
@@ -18,6 +19,7 @@ public class Game extends javax.swing.JFrame {
     private model.Manager manager;
     private music.MP3Player player;
     private GamePanel painting;
+    private BufferStrategy buffer;
     
     /**
      * Creates new form Game
@@ -28,11 +30,12 @@ public class Game extends javax.swing.JFrame {
         this.setIgnoreRepaint(true);
         this.initComponents();
         this.setSize(1500, 1000);
-        this.painting =  new GamePanel();
+        this.createBufferStrategy(2);
+        this.buffer = this.getBufferStrategy();
+        this.painting = new GamePanel(buffer);
         this.add(painting);
         this.manager = model.Manager.getInstance();
         this.player = new music.MP3Player("music/files/Miles.mp3");
-        this.painting = new GamePanel();
         this.player.play();
         this.addKeyListener(new KeyAdapter(){
             

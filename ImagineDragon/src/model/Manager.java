@@ -59,8 +59,8 @@ public class Manager{
      * 
      */
     private void init(){
-        this.factory         = model.structure.FigureFactory.getInstance();
-        this.loader          = pictures.ImageLoader.getInstance();
+        this.factory         = FigureFactory.getInstance();
+        this.loader          = ImageLoader.getInstance();
         this.rnd             = new Random();
         this.dino            = (Dino) factory.factFigure(Names.Names.Dino, this.gameVelocity);
         this.managerTime     = new Timer();
@@ -75,7 +75,7 @@ public class Manager{
         this.score           = 0;
         this.kolissionFlag   = false;
         this.delayFlag       = false;
-        this.backRect        = new Rectangle(0, 0, loader.getImage(Pictures.Desert).getWidth(null), loader.getImage(Pictures.Desert).getHeight(null));
+        this.backRect        = new Rectangle(0, 0, this.loader.getImage(Pictures.Desert).getWidth(null), this.loader.getImage(Pictures.Desert).getHeight(null));
         this.task            = new TimerTask(){
             @Override
             public void run(){
