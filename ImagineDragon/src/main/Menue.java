@@ -32,6 +32,7 @@ public class Menue extends javax.swing.JFrame implements ActionListener{
     public Menue() {
         loader = pictures.ImageLoader.getInstance();
         this.setResizable(false);
+        this.setUndecorated(true);
         this.setContentPane(new JLabel(new ImageIcon(loader.getImage(Pictures.Normal))));
         initComponents();
         this.setSize(1500, 1000);
