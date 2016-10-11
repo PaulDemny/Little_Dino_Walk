@@ -89,7 +89,7 @@ public class Game extends javax.swing.JFrame {
                 if (key == KeyEvent.VK_LEFT || key == KeyEvent.VK_RIGHT || key == KeyEvent.VK_A || key == KeyEvent.VK_D){
                     manager.still();
                 }
-                if(key == KeyEvent.VK_SPACE){
+                if(key == KeyEvent.VK_SPACE || key == KeyEvent.VK_W){
                     manager.quitJump();
                 }
             }

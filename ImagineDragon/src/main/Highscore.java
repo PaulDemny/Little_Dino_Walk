@@ -5,6 +5,7 @@
  */
 package main;
 
+import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import javax.swing.ImageIcon;
@@ -12,8 +13,6 @@ import javax.swing.JLabel;
 import pictures.ImageLoader;
 import pictures.Pictures;
 import java.sql.*;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import music.MP3Player;
 
 /**
@@ -65,13 +64,16 @@ public class Highscore extends javax.swing.JFrame implements ActionListener{
             this.result = order.executeQuery(statement);
             while (this.result.next()){
                 this.output += String.valueOf(this.place) + ". Name: " + this.result.getString("Name") + "\t\t" + String.valueOf(this.result.getInt("Level")) + "\t\t" + String.valueOf(this.result.getInt("Score"));
+                if (this.place > 9){
+                    break;
+                }
             }
             
-            
+            this.setFont(new Font(Font.SERIF, Font.ITALIC, 20));
             this.highscoreView.setText(this.output);
         }   
         catch (Exception ex) {
-            Logger.getLogger(Highscore.class.getName()).log(Level.SEVERE, null, ex);
+            System.out.println(ex.getMessage());
         }
     }
 

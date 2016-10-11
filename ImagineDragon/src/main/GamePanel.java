@@ -78,6 +78,7 @@ public class GamePanel extends JPanel implements ActionListener, IObserver{
         plainMdl.setColor(Color.red);
         plainMdl.drawString("Level: " + String.valueOf(this.level), 20, 50);
         plainMdl.drawString("Score: " + String.valueOf(this.score), 300, 50);
+        buffer.show();
    }
 
     public void stopTimer(){
