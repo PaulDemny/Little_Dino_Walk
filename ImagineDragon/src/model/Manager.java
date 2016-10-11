@@ -120,24 +120,36 @@ public class Manager{
      */
     private void factEnemies(){
         this.raiseLevelCheck();
+        this.addSmall();
+        if(this.level >= 10){
+            this.addMiddle();
+        }
+        if(this.level >= 15){
+            this.addLarge();
+        }
+    }
+    
+    private void addSmall(){
         switch(this.rnd.nextInt(10)){
-            case 5:
+            case 2: case 8:
                 enemies.add(factory.factFigure(Names.Small, this.gameVelocity));
                 break;
         }
-        if(this.level >= 10){
-            switch(this.rnd.nextInt(50)){
-                case 5:
-                    this.enemies.add(this.factory.factFigure(Names.Middle, this.gameVelocity));
-                    break;
-                }
-            }
-        if(this.level >= 15){
-            switch(rnd.nextInt(20)){
-                case 5:
+    }
+    
+    private void addMiddle(){
+            switch(rnd.nextInt(30)){
+                case 10: case 20:
                     this.enemies.add(this.factory.factFigure(Names.Large, this.gameVelocity));
                     break;
             }
+    }
+    
+    private void addLarge(){
+        switch(rnd.nextInt(30)){
+                case 10: case 20:
+                    this.enemies.add(this.factory.factFigure(Names.Large, this.gameVelocity));
+                    break;
         }
     }
     
@@ -155,7 +167,6 @@ public class Manager{
      */
     private void move(){
         this.killEnemies();
-        this.notifyObservers();
         for (int i = 0; i < this.enemies.size(); i++){
             this.enemies.get(i).move(this.gameVelocity);
             if(this.enemies.get(i).getRect().y < 500){
@@ -210,7 +221,7 @@ public class Manager{
                 public void run() {
                     delayFlag = false;
                 }
-            }, 500);
+            }, 1000);
         }
     }
 
@@ -250,6 +261,7 @@ public class Manager{
                 this.enemies.remove(i);
             }
         }
+        this.notifyObservers();
     }
     
     public void quitJump(){
