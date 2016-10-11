@@ -65,6 +65,8 @@ public class GamePanel extends JPanel implements ActionListener, IObserver{
     public void paintComponent(Graphics graph) {
         super.paintComponent(graph);
         Graphics2D plainMdl = (Graphics2D) graph;
+        this.dino = this.manager.getDino();
+        this.enemies = this.manager.getEnemies();
         plainMdl.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
         plainMdl.drawImage(loader.getImage(Pictures.Desert), manager.getBackRect().x, manager.getBackRect().y, null);
         icon = loader.getImageIcon(Pictures.Dino);
@@ -103,7 +105,5 @@ public class GamePanel extends JPanel implements ActionListener, IObserver{
     public void update() {
         this.level = this.manager.getLevel();
         this.score = this.manager.getScore();
-        this.dino = this.manager.getDino();
-        this.enemies = this.manager.getEnemies();
     }
 }

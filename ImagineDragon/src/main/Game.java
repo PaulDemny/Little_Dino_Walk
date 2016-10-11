@@ -39,6 +39,7 @@ public class Game extends javax.swing.JFrame {
         this.player.play();
         this.addKeyListener(new KeyAdapter(){
             
+            private int key;
             /**
              * 
              * @param e 
@@ -46,26 +47,28 @@ public class Game extends javax.swing.JFrame {
             @Override
             public void keyPressed(KeyEvent e) {
                 
-                if (e.getKeyCode() == KeyEvent.VK_ESCAPE){
+                key = e.getKeyCode();
+                
+                if (key == KeyEvent.VK_ESCAPE){
                     player.stop();
                     setVisible(false);
                     Menue menue = new Menue();
                     menue.setVisible(true);
                 }
                 
-                if (e.getKeyCode() == KeyEvent.VK_LEFT){
+                if (key == KeyEvent.VK_LEFT || key == KeyEvent.VK_A){
                     manager.revers();
                 }
                 
-                if (e.getKeyCode() == KeyEvent.VK_RIGHT){
+                if (key == KeyEvent.VK_RIGHT || key == KeyEvent.VK_D){
                     manager.forward();
                 }
                 
-                if (e.getKeyCode() == KeyEvent.VK_SPACE){
+                if (key == KeyEvent.VK_SPACE || key == KeyEvent.VK_W){
                     manager.jump();
                 }
                 
-                if (e.getKeyCode() == KeyEvent.VK_P){
+                if (key == KeyEvent.VK_P){
                     painting.stopTimer();
                 }
                 
@@ -80,10 +83,13 @@ public class Game extends javax.swing.JFrame {
              */
             @Override
             public void keyReleased(KeyEvent e) {
-                if (e.getKeyCode() == KeyEvent.VK_LEFT || e.getKeyCode() == KeyEvent.VK_RIGHT){
+                
+                key = e.getKeyCode();
+                
+                if (key == KeyEvent.VK_LEFT || key == KeyEvent.VK_RIGHT || key == KeyEvent.VK_A || key == KeyEvent.VK_D){
                     manager.still();
                 }
-                if(e.getKeyCode() == KeyEvent.VK_SPACE){
+                if(key == KeyEvent.VK_SPACE){
                     manager.quitJump();
                 }
             }

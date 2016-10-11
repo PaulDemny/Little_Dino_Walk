@@ -30,11 +30,12 @@ public class Highscore extends javax.swing.JFrame implements ActionListener{
     private ResultSet result;
     private String output;
     private byte place;
+    private JLabel highscoreView;
 
     /**
      * Creates new form Highscore
      */
-    public Highscore() {
+    public Highscore(){
         this.setUndecorated(true);
         this.loader = ImageLoader.getInstance();
         this.setContentPane(new JLabel(new ImageIcon(loader.getImage(Pictures.Normal))));
@@ -52,6 +53,8 @@ public class Highscore extends javax.swing.JFrame implements ActionListener{
         this.setResizable(false);
         this.player = new MP3Player("music/files/Gold.mp3");
         this.player.play();
+        this.highscoreView = new JLabel();
+        this.highscoreView.setLocation(500, 400);
         this.connect = null;
         this.order = null;
         try{
@@ -64,6 +67,8 @@ public class Highscore extends javax.swing.JFrame implements ActionListener{
                 this.output += String.valueOf(this.place) + ". Name: " + this.result.getString("Name") + "\t\t" + String.valueOf(this.result.getInt("Level")) + "\t\t" + String.valueOf(this.result.getInt("Score"));
             }
             
+            
+            this.highscoreView.setText(this.output);
         }   
         catch (Exception ex) {
             Logger.getLogger(Highscore.class.getName()).log(Level.SEVERE, null, ex);
