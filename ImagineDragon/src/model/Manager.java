@@ -70,7 +70,7 @@ public class Manager{
         this.intervallCreate = 30;
         this.enemies         = new ArrayList <>();
         this.observers       = new ArrayList <>();
-        this.level           = 1;
+        this.level           = 10;
         this.levelIncrement  = 0;
         this.score           = 0;
         this.kolissionFlag   = false;
@@ -80,7 +80,9 @@ public class Manager{
             @Override
             public void run(){
                 move();
-                kolission();
+                if(kolission()){
+                    System.out.print("Kolission\n");
+                }
             }
         };
         this.passsive        = new TimerTask(){
@@ -120,18 +122,31 @@ public class Manager{
      */
     private void factEnemies(){
         this.raiseLevelCheck();
-        this.addSmall();
-        if(this.level >= 10){
-            this.addMiddle();
-        }
-        if(this.level >= 15){
-            this.addLarge();
+        switch(rnd.nextInt(2)){
+            case 0:
+                this.addSmall();
+                break;
+                
+            case 1:
+                if(this.level >= 10){
+                    this.addMiddle();
+                }
+                break;
+             
+            case 2:
+                if(this.level >= 15){
+                    this.addLarge();
+                }
+                break;
+                
+            default:
+                break;
         }
     }
     
     private void addSmall(){
         switch(this.rnd.nextInt(10)){
-            case 2: case 8:
+            case 0: case 2: case 4: case 6:case 8:
                 enemies.add(factory.factFigure(Names.Small, this.gameVelocity));
                 break;
         }
@@ -139,15 +154,15 @@ public class Manager{
     
     private void addMiddle(){
             switch(rnd.nextInt(30)){
-                case 10: case 20:
-                    this.enemies.add(this.factory.factFigure(Names.Large, this.gameVelocity));
+                case 0: case 10: case 20: case 29:
+                    this.enemies.add(this.factory.factFigure(Names.Middle, this.gameVelocity));
                     break;
             }
     }
     
     private void addLarge(){
         switch(rnd.nextInt(30)){
-                case 10: case 20:
+            case 0: case 10: case 20:
                     this.enemies.add(this.factory.factFigure(Names.Large, this.gameVelocity));
                     break;
         }
