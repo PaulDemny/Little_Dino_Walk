@@ -70,7 +70,7 @@ public class Manager{
         this.intervallCreate = 30;
         this.enemies         = new ArrayList <>();
         this.observers       = new ArrayList <>();
-        this.level           = 10;
+        this.level           = 15;
         this.levelIncrement  = 0;
         this.score           = 0;
         this.kolissionFlag   = false;
@@ -81,6 +81,7 @@ public class Manager{
             public void run(){
                 move();
                 if(kolission()){
+                    kolissionFlag = true;
                     System.out.print("Kolission\n");
                 }
             }
@@ -107,14 +108,16 @@ public class Manager{
      */
     public void start(){
       this.managerTime.scheduleAtFixedRate(task, 0, this.intervallCreate);
-      this.enemyTime.scheduleAtFixedRate(passsive, 0, this.intervallCreate * 33);
+      this.enemyTime.scheduleAtFixedRate(passsive, 0, this.intervallCreate * 50);
     }
 
     /**
      * 
      */
     public void stop(){
-        
+        this.managerTime.cancel();
+        this.enemyTime.cancel();
+        this.dino.killDino();
     }
 
     /**
@@ -153,8 +156,8 @@ public class Manager{
     }
     
     private void addMiddle(){
-            switch(rnd.nextInt(30)){
-                case 0: case 10: case 20: case 29:
+            switch(rnd.nextInt(20)){
+                case 0: case 5: case 10: case 15: case 19:
                     this.enemies.add(this.factory.factFigure(Names.Middle, this.gameVelocity));
                     break;
             }
@@ -162,7 +165,7 @@ public class Manager{
     
     private void addLarge(){
         switch(rnd.nextInt(30)){
-            case 0: case 10: case 20:
+            case 0: case 5: case 10: case 15: case 20: case 25:
                     this.enemies.add(this.factory.factFigure(Names.Large, this.gameVelocity));
                     break;
         }
@@ -236,7 +239,7 @@ public class Manager{
                 public void run() {
                     delayFlag = false;
                 }
-            }, 1000);
+            }, 500);
         }
     }
 
@@ -267,6 +270,14 @@ public class Manager{
 
     public int getLevel() {
         return this.level;
+    }
+    
+    /**
+     * 
+     * @return 
+     */
+    public boolean getKollissionsFlag(){
+        return this.kolissionFlag;
     }
 
     private void killEnemies(){

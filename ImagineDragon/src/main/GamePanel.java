@@ -5,13 +5,11 @@
  */
 package main;
 
-import java.awt.Canvas;
 import java.awt.Color;
 import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.RenderingHints;
-import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.image.BufferStrategy;
@@ -50,13 +48,13 @@ public class GamePanel extends JPanel implements ActionListener, IObserver{
     }
     
     private void init(){
-        this.manager = Manager.getInstance();
-        this.loader = ImageLoader.getInstance();
-        this.gameTime = new Timer(30, this);
+        this.manager    = Manager.getInstance();
+        this.loader     = ImageLoader.getInstance();
+        this.gameTime   = new Timer(30, this);
         this.gameTime.start();
         this.actionFlag = false;
         this.setSize(1500, 1000);
-        //this.setDoubleBuffered(true);
+        this.setDoubleBuffered(true);
         this.setIgnoreRepaint(true);
         this.manager.attach(this);
         this.update();
@@ -107,5 +105,12 @@ public class GamePanel extends JPanel implements ActionListener, IObserver{
     public void update() {
         this.level = this.manager.getLevel();
         this.score = this.manager.getScore();
+    }
+    
+    private void checkStatus(){
+        if (manager.getKollissionsFlag()){
+            this.gameTime.stop();
+            this.manager.stop();
+        }
     }
 }
