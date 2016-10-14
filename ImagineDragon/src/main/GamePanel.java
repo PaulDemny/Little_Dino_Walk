@@ -5,6 +5,7 @@
  */
 package main;
 
+import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Font;
 import java.awt.Graphics;
@@ -38,7 +39,6 @@ public class GamePanel extends JPanel implements ActionListener, IObserver{
     private List <Figures> enemies;
     private int level;
     private int score;
-    private BufferStrategy buffer;
     
     /**
      * 
@@ -81,13 +81,14 @@ public class GamePanel extends JPanel implements ActionListener, IObserver{
    }
 
     public void stopTimer(){
-        if (actionFlag){
+        if(gameTime.isRunning()){
+            gameTime.stop();
         }
     }
     
     public void startTimer(){
-        if (!actionFlag){
-            
+        if (!gameTime.isRunning()){
+            gameTime.start();
         }
     }
     

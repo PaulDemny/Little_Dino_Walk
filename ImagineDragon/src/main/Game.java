@@ -5,8 +5,12 @@
  */
 package main;
 
+import java.awt.BorderLayout;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
+import javax.swing.JButton;
+import model.Manager;
+import music.MP3Player;
 
 
 /**
@@ -15,9 +19,13 @@ import java.awt.event.KeyEvent;
  */
 public class Game extends javax.swing.JFrame {
 
-    private model.Manager manager;
-    private music.MP3Player player;
+    private Manager manager;
+    private MP3Player player;
     private GamePanel painting;
+    private PausePanel pause;
+    private KeyAdapter adapter;
+    private JButton resume;
+    
     
 //    static {
 //    System.setProperty("sun.java2d.transaccel", "True");
@@ -35,15 +43,16 @@ public class Game extends javax.swing.JFrame {
         this.setIgnoreRepaint(true);
         this.initComponents();
         this.setSize(1500, 1000);
-        this.createBufferStrategy(2);
         this.painting = new GamePanel();
-        this.add(painting);
-        this.manager = model.Manager.getInstance();
-        this.player = new music.MP3Player("music/files/Miles.mp3");
+        this.pause = new PausePanel(this);
+        this.getContentPane().add(painting, BorderLayout.CENTER);
+        this.manager = Manager.getInstance();
+        this.player = new MP3Player("music/files/Miles.mp3");
         this.player.play();
         this.addKeyListener(new KeyAdapter(){
             
             private int key;
+            
             /**
              * 
              * @param e 
@@ -55,29 +64,37 @@ public class Game extends javax.swing.JFrame {
                 
                 if (key == KeyEvent.VK_ESCAPE){
                     player.stop();
-                    setVisible(false);
-                    Menue menue = new Menue();
-                    menue.setVisible(true);
+                    manager.stop();
+                    painting.stopTimer();
+                    getContentPane().removeAll();
+                    getContentPane().add(pause, BorderLayout.CENTER);
+                    repaint();
+                    System.out.println("kjkjkjkjjjkkj");
                 }
                 
                 if (key == KeyEvent.VK_LEFT || key == KeyEvent.VK_A){
                     manager.revers();
+                    System.out.println("kjkjkjkjjjkkj");
                 }
                 
                 if (key == KeyEvent.VK_RIGHT || key == KeyEvent.VK_D){
                     manager.forward();
+                    System.out.println("kjkjkjkjjjkkj");
                 }
                 
                 if (key == KeyEvent.VK_SPACE || key == KeyEvent.VK_W){
                     manager.jump();
+                    System.out.println("kjkjkjkjjjkkj");
                 }
                 
                 if (key == KeyEvent.VK_P){
                     painting.stopTimer();
+                    System.out.println("kjkjkjkjjjkkj");
                 }
                 
                 if (e.getKeyCode() == KeyEvent.VK_R){
                     painting.startTimer();
+                    System.out.println("kjkjkjkjjjkkj");
                 }
             }
             
@@ -92,14 +109,25 @@ public class Game extends javax.swing.JFrame {
                 
                 if (key == KeyEvent.VK_LEFT || key == KeyEvent.VK_RIGHT || key == KeyEvent.VK_A || key == KeyEvent.VK_D){
                     manager.still();
+                    System.out.println("kjkjkjkjjjkkj");
                 }
                 if(key == KeyEvent.VK_SPACE || key == KeyEvent.VK_W){
                     manager.quitJump();
+                    System.out.println("kjkjkjkjjjkkj");
                 }
             }
             
             
         });
+        
+    }
+    
+    public void killPause(){
+        getContentPane().removeAll();
+        getContentPane().add(painting, BorderLayout.CENTER);
+        this.manager.start();
+        this.painting.startTimer();
+        repaint();
     }
 
     /**
