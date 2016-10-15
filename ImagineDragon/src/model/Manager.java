@@ -51,48 +51,27 @@ public class Manager{
      * 
      */
     private Manager(){
-        
-        this.init();
     }    
 
     /**
      * 
      */
-    private void init(){
+    public void init(){
         this.factory         = FigureFactory.getInstance();
         this.loader          = ImageLoader.getInstance();
         this.rnd             = new Random();
-        this.dino            = (Dino) factory.factFigure(Names.Names.Dino, this.gameVelocity);
-        this.managerTime     = new Timer();
-        this.enemyTime       = new Timer();
-        this.delayJump       = new Timer();
         this.gameVelocity    = 15;
         this.intervallCreate = 30;
-        this.enemies         = new ArrayList <>();
-        this.observers       = new ArrayList <>();
         this.level           = 15;
         this.levelIncrement  = 0;
         this.score           = 0;
+        this.dino            = (Dino) factory.factFigure(Names.Names.Dino, this.gameVelocity);
+        this.delayJump       = new Timer();
+        this.enemies         = new ArrayList <>();
+        this.observers       = new ArrayList <>();
         this.kolissionFlag   = false;
         this.delayFlag       = false;
         this.backRect        = new Rectangle(0, 0, this.loader.getImage(Pictures.Desert).getWidth(null), this.loader.getImage(Pictures.Desert).getHeight(null));
-        this.task            = new TimerTask(){
-            @Override
-            public void run(){
-                move();
-                if(kolission()){
-                    kolissionFlag = true;
-                    System.out.print("Kolission\n");
-                }
-            }
-        };
-        this.passsive        = new TimerTask(){
-            @Override
-            public void run() {
-                factEnemies();
-            }
-        };
-        this.start();
     }
 
     /**
@@ -107,8 +86,27 @@ public class Manager{
      * 
      */
     public void start(){
+      this.managerTime     = new Timer();
+      this.enemyTime       = new Timer();
+      this.task            = new TimerTask(){
+            @Override
+            public void run(){
+                move();
+                if(kolission()){
+                    notifyObservers(States.GameOver);
+                    stop();
+                }
+            }
+        };
+        this.passsive = new TimerTask(){
+            @Override
+            public void run() {
+                factEnemies();
+            }
+        };
       this.managerTime.scheduleAtFixedRate(task, 0, this.intervallCreate);
       this.enemyTime.scheduleAtFixedRate(passsive, 0, this.intervallCreate * 50);
+      this.dino.startDino();
     }
 
     /**
@@ -220,11 +218,11 @@ public class Manager{
      * 
      */
     public void forward(){
-        this.dino.move(20);
+        this.dino.move(15);
     }
     
     public void revers(){
-        this.dino.move(-20);
+        this.dino.move(-15);
     }
 
     /**
@@ -287,7 +285,7 @@ public class Manager{
                 this.enemies.remove(i);
             }
         }
-        this.notifyObservers();
+        this.notifyObservers(States.LevelUpdate);
     }
     
     public void quitJump(){
@@ -302,9 +300,9 @@ public class Manager{
         this.observers.add(observer);
     }
     
-    private void notifyObservers(){
+    private void notifyObservers(States state){
         for (int i = 0; i < this.observers.size(); i++){
-            this.observers.get(i).update();
+            this.observers.get(i).update(state);
         }
     }
 }

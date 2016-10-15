@@ -178,7 +178,7 @@ public class Menue extends javax.swing.JFrame implements ActionListener{
             Instructions anleitung = new Instructions();
             player.stop();
             this.setVisible(false);
-            anleitung.setVisible(true);            
+            anleitung.setVisible(true);
         }
         
         if (e.getSource() == spielen){
@@ -198,7 +198,7 @@ public class Menue extends javax.swing.JFrame implements ActionListener{
         if (e.getSource() == schließen){
             player.stop();
             this.setVisible(false);
-            System.exit(0); 
+            System.exit(0);
         }
         
     }

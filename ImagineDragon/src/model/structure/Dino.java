@@ -26,31 +26,8 @@ public class Dino extends Figures{
     public Dino(Rectangle rect, pictures.Pictures img) {
         super(rect, img);
         this.dinoVelocity = 0;
-        this.walking = new Thread(){
-            @Override
-            public void run() {
-                while (movement) {
-                    if (dinoVelocity < 0){
-                        if (rect.x > 0){
-                            rect.x += dinoVelocity;
-                        }
-                    }
-                    if (dinoVelocity > 0){
-                        if (rect.x < 1200){
-                            rect.x += dinoVelocity;
-                        }
-                    }
-                    try {
-                        Thread.sleep(25);
-                    } 
-                    catch (Exception ex) {
-                        System.err.println(ex.getMessage());
-                    }
-                }
-            }
-        };
         this.movement = true;
-        this.walking.start();
+        this.startDino();
         this.zenit = false;
     }
 
@@ -65,7 +42,7 @@ public class Dino extends Figures{
      * 
      */
     private void task(){
-        if(this.rect.y > 200){
+        if(this.rect.y > 200 && this.rect.x < 1200){
             this.rect.y -= 7;
             this.rect.x += 1;
             this.zenit = false;
@@ -109,5 +86,33 @@ public class Dino extends Figures{
     
     public void resetZenit(){
         this.zenit = true;
+    }
+    
+    public void startDino(){
+        this.walking = new Thread(){
+            @Override
+            public void run() {
+                while (movement) {
+                    if (dinoVelocity < 0){
+                        if (rect.x > 0){
+                            rect.x += dinoVelocity;
+                        }
+                    }
+                    if (dinoVelocity > 0){
+                        if (rect.x < 1200){
+                            rect.x += dinoVelocity;
+                        }
+                    }
+                    try {
+                        Thread.sleep(25);
+                    } 
+                    catch (Exception ex) {
+                        System.err.println(ex.getMessage());
+                    }
+                }
+            }
+        };
+        this.walking.start();
+        this.movement = true;
     }
 }
