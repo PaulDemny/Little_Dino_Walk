@@ -73,7 +73,6 @@ public class Highscore extends javax.swing.JFrame implements ActionListener{
                 this.place++;
             }
             this.output = this.output.concat("</html>");
-            System.out.println(this.output);
             highscoreView.setLocation(750, 100);
             
             highscoreView.setFont(new Font(Font.MONOSPACED, Font.BOLD, 45));

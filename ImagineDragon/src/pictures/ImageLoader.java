@@ -24,8 +24,8 @@ public class ImageLoader {
     private BufferedImage middle        = null;
     private BufferedImage small         = null;
     private BufferedImage normal        = null;
+    private BufferedImage antiDino      = null;
     
-    private ImageIcon antiDino          = null;
     private ImageIcon roar              = null;
     private ImageIcon dino              = null;
     
@@ -47,10 +47,10 @@ public class ImageLoader {
             this.small      = ImageIO.read(getClass().getClassLoader().getResource("pictures/files/small.png"));
             this.normal     = ImageIO.read(getClass().getClassLoader().getResource("pictures/files/desert.png"));
             this.background = ImageIO.read(getClass().getClassLoader().getResource("pictures/files/panel.png"));
-            
+            this.antiDino   = ImageIO.read(getClass().getClassLoader().getResource("pictures/files/enemy.png"));
+                    
             this.dino       = new ImageIcon(getClass().getClassLoader().getResource("pictures/files/char.gif"));
             this.roar       = new ImageIcon(getClass().getClassLoader().getResource("pictures/files/Dino.gif"));
-            this.antiDino   = new ImageIcon(getClass().getClassLoader().getResource("pictures/files/bsp.gif"));
         }   
         catch (IOException ex){
             System.out.println(ex.getMessage());
@@ -95,6 +95,10 @@ public class ImageLoader {
             case Normal:
                 imageInstance = normal;
                 break;
+                
+            case AntiDino:
+                imageInstance = antiDino;
+                break;
         }
         
         return imageInstance;
@@ -119,9 +123,6 @@ public class ImageLoader {
                 iconInstance = dino;
                 break;
                 
-            case AntiDino:
-                iconInstance = antiDino;
-                break;
         }
         
         return iconInstance;

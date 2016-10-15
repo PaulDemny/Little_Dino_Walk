@@ -73,7 +73,7 @@ public class GamePanel extends JPanel implements ActionListener, IObserver{
         plainMdl.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
         plainMdl.drawImage(loader.getImage(Pictures.Desert), manager.getBackRect().x, manager.getBackRect().y, null);
         icon = loader.getImageIcon(Pictures.Dino);
-        icon.paintIcon(this, plainMdl, dino.getRect().x - 60, dino.getRect().y);
+        icon.paintIcon(this, plainMdl, dino.getRect().x - 70, dino.getRect().y);
         for (int i = 0; i < enemies.size(); i++){
             plainMdl.drawImage(loader.getImage(enemies.get(i).getImage()), enemies.get(i).getRect().x, enemies.get(i).getRect().y, null);
         }

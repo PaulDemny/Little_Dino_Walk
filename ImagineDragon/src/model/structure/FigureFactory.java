@@ -45,11 +45,11 @@ public class FigureFactory {
         
         switch(objectName){
             case AntiDino:
-                newfig = new AntiDino(new Rectangle(1500, 750 , loader.getImage(Pictures.AntiDino).getWidth(null), loader.getImage(Pictures.AntiDino).getHeight(null)), velocity, Pictures.AntiDino);
+                newfig = new AntiDino(new Rectangle(1500, 800 , loader.getImage(Pictures.AntiDino).getWidth(null), loader.getImage(Pictures.AntiDino).getWidth(null)), velocity, Pictures.AntiDino);
                 break;
                 
             case Dino:
-                newfig = new Dino(new Rectangle(70, 200, loader.getImageIcon(Pictures.Dino).getIconWidth() - 120, loader.getImageIcon(Pictures.Dino).getIconHeight()), Pictures.Dino);
+                newfig = new Dino(new Rectangle(70, 100, loader.getImageIcon(Pictures.Dino).getIconWidth() - 140, loader.getImageIcon(Pictures.Dino).getIconHeight()), Pictures.Dino);
                 break;
              
             case Large:

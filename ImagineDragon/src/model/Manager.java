@@ -40,7 +40,6 @@ public class Manager{
     private List <IObserver> observers;
     private Rectangle backRect;
     private int level;
-    private boolean kolissionFlag;
     private volatile boolean delayFlag;
     private Random rnd;
     private int levelIncrement;
@@ -61,14 +60,13 @@ public class Manager{
         this.rnd             = new Random();
         this.gameVelocity    = 15;
         this.intervallCreate = 30;
-        this.level           = 15;
+        this.level           = 20;
         this.levelIncrement  = 0;
         this.score           = 0;
         this.dino            = (Dino) factory.factFigure(Names.Names.Dino, this.gameVelocity);
         this.delayJump       = new Timer();
         this.enemies         = new ArrayList <>();
         this.observers       = new ArrayList <>();
-        this.kolissionFlag   = false;
         this.delayFlag       = false;
         this.backRect        = new Rectangle(0, 0, this.loader.getImage(Pictures.Desert).getWidth(null), this.loader.getImage(Pictures.Desert).getHeight(null));
     }
@@ -122,7 +120,7 @@ public class Manager{
      */
     private void factEnemies(){
         this.raiseLevelCheck();
-        switch(rnd.nextInt(2)){
+        switch(rnd.nextInt(3)){
             case 0:
                 this.addSmall();
                 break;
@@ -136,6 +134,7 @@ public class Manager{
             case 2:
                 if(this.level >= 15){
                     this.addLarge();
+                    this.addAntiDino();
                 }
                 break;
                 
@@ -173,6 +172,14 @@ public class Manager{
         switch(rnd.nextInt(30)){
             case 0: case 5: case 10: case 15: case 20: case 25:
                     this.enemies.add(this.factory.factFigure(Names.Large, this.gameVelocity));
+                    break;
+       }
+    }
+    
+    private void addAntiDino(){
+        switch(rnd.nextInt(30)){
+            case 0: case 5: case 10: case 15: case 20: case 25:
+                    this.enemies.add(this.factory.factFigure(Names.AntiDino, this.gameVelocity + 2));
                     break;
         }
     }
