@@ -51,14 +51,12 @@ public class Manager{
      * 
      */
     private Manager(){
-        
-        this.init();
     }    
 
     /**
      * 
      */
-    private void init(){
+    public void init(){
         this.factory         = FigureFactory.getInstance();
         this.loader          = ImageLoader.getInstance();
         this.rnd             = new Random();
@@ -74,7 +72,6 @@ public class Manager{
         this.kolissionFlag   = false;
         this.delayFlag       = false;
         this.backRect        = new Rectangle(0, 0, this.loader.getImage(Pictures.Desert).getWidth(null), this.loader.getImage(Pictures.Desert).getHeight(null));
-        this.start();
     }
 
     /**
@@ -96,7 +93,8 @@ public class Manager{
             public void run(){
                 move();
                 if(kolission()){
-                    kolissionFlag = true;
+                    notifyObservers(States.GameOver);
+                    stop();
                 }
             }
         };
@@ -116,9 +114,7 @@ public class Manager{
      */
     public void stop(){
         this.managerTime.cancel();
-        this.managerTime = null;
         this.enemyTime.cancel();
-        this.enemyTime = null;
         this.dino.killDino();
     }
 
@@ -289,7 +285,7 @@ public class Manager{
                 this.enemies.remove(i);
             }
         }
-        this.notifyObservers();
+        this.notifyObservers(States.LevelUpdate);
     }
     
     public void quitJump(){
@@ -304,9 +300,9 @@ public class Manager{
         this.observers.add(observer);
     }
     
-    private void notifyObservers(){
+    private void notifyObservers(States state){
         for (int i = 0; i < this.observers.size(); i++){
-            this.observers.get(i).update();
+            this.observers.get(i).update(state);
         }
     }
 }

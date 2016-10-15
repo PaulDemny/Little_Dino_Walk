@@ -42,7 +42,7 @@ public class Dino extends Figures{
      * 
      */
     private void task(){
-        if(this.rect.y > 200){
+        if(this.rect.y > 200 && this.rect.x < 1200){
             this.rect.y -= 7;
             this.rect.x += 1;
             this.zenit = false;
@@ -113,5 +113,6 @@ public class Dino extends Figures{
             }
         };
         this.walking.start();
+        this.movement = true;
     }
 }

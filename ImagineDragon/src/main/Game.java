@@ -8,8 +8,8 @@ package main;
 import java.awt.BorderLayout;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
-import javax.swing.JButton;
 import model.Manager;
+import model.States;
 import music.MP3Player;
 
 
@@ -17,15 +17,13 @@ import music.MP3Player;
  *
  * @author Paul
  */
-public class Game extends javax.swing.JFrame {
+public class Game extends javax.swing.JFrame implements IObserver{
 
     private Manager manager;
     private MP3Player player;
     private GamePanel painting;
     private PausePanel pause;
-    private KeyAdapter adapter;
-    private JButton resume;
-    
+    private GameOverPanel gameOver;
     
 //    static {
 //    System.setProperty("sun.java2d.transaccel", "True");
@@ -34,19 +32,26 @@ public class Game extends javax.swing.JFrame {
 //    System.setProperty("sun.java2d.d3d", "True");
 //    System.setProperty("sun.java2d.ddforcevram", "True");
 //    }
+    
     /**
      * Creates new form Game
      */
     public Game() {
+        this.manager = Manager.getInstance();
+        manager.init();
+        this.manager.start();
+        this.manager.attach(this);
         this.setUndecorated(true);
         this.setResizable(false);
         this.setIgnoreRepaint(true);
+        this.setFocusable(true);
         this.initComponents();
         this.setSize(1500, 1000);
+        this.setFocusable(true);
         this.painting = new GamePanel();
         this.pause = new PausePanel(this);
+        this.gameOver = new GameOverPanel(this);
         this.getContentPane().add(painting, BorderLayout.CENTER);
-        this.manager = Manager.getInstance();
         this.player = new MP3Player("music/files/Miles.mp3");
         this.player.play();
         this.addKeyListener(new KeyAdapter(){
@@ -68,33 +73,29 @@ public class Game extends javax.swing.JFrame {
                     painting.stopTimer();
                     getContentPane().removeAll();
                     getContentPane().add(pause, BorderLayout.CENTER);
+                    player = new MP3Player("music/files/Walk.mp3");
+                    player.play();
                     repaint();
-                    System.out.println("kjkjkjkjjjkkj");
                 }
                 
                 if (key == KeyEvent.VK_LEFT || key == KeyEvent.VK_A){
                     manager.revers();
-                    System.out.println("kjkjkjkjjjkkj");
                 }
                 
                 if (key == KeyEvent.VK_RIGHT || key == KeyEvent.VK_D){
                     manager.forward();
-                    System.out.println("kjkjkjkjjjkkj");
                 }
                 
                 if (key == KeyEvent.VK_SPACE || key == KeyEvent.VK_W){
                     manager.jump();
-                    System.out.println("kjkjkjkjjjkkj");
                 }
                 
                 if (key == KeyEvent.VK_P){
                     painting.stopTimer();
-                    System.out.println("kjkjkjkjjjkkj");
                 }
                 
                 if (e.getKeyCode() == KeyEvent.VK_R){
                     painting.startTimer();
-                    System.out.println("kjkjkjkjjjkkj");
                 }
             }
             
@@ -109,11 +110,9 @@ public class Game extends javax.swing.JFrame {
                 
                 if (key == KeyEvent.VK_LEFT || key == KeyEvent.VK_RIGHT || key == KeyEvent.VK_A || key == KeyEvent.VK_D){
                     manager.still();
-                    System.out.println("kjkjkjkjjjkkj");
                 }
                 if(key == KeyEvent.VK_SPACE || key == KeyEvent.VK_W){
                     manager.quitJump();
-                    System.out.println("kjkjkjkjjjkkj");
                 }
             }
             
@@ -123,13 +122,47 @@ public class Game extends javax.swing.JFrame {
     }
     
     public void killPause(){
+        this.setFocusable(true);
+        player.stop();
+        this.player = new MP3Player("music/files/Miles.mp3");
+        this.player.play();
         getContentPane().removeAll();
         getContentPane().add(painting, BorderLayout.CENTER);
+        this.setFocusable(true);
         this.manager.start();
         this.painting.startTimer();
         repaint();
     }
+    
+    public MP3Player getPlayer(){
+        return player;
+    }
+    
+    public void finish(){
+        this.player.stop();
+        this.painting.stopTimer();
+        this.manager.stop();
+        this.setVisible(false);
+        Menue menue = new Menue();
+        menue.setVisible(true);
+    }
+    
+    public void showGameOver(){
+        player.stop();
+        painting.stopTimer();
+        getContentPane().removeAll();
+        getContentPane().add(gameOver, BorderLayout.CENTER);
+        player = new MP3Player("music/files/Watchmen.mp3");
+        player.play();
+        repaint();
+    }
 
+    @Override
+    public void update(States state) {
+        if(state.equals(States.GameOver)){
+            this.showGameOver();
+        }
+    }
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always

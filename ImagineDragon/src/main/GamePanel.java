@@ -5,7 +5,6 @@
  */
 package main;
 
-import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Font;
 import java.awt.Graphics;
@@ -13,7 +12,6 @@ import java.awt.Graphics2D;
 import java.awt.RenderingHints;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.awt.image.BufferStrategy;
 import java.util.List;
 import javax.swing.Timer;
 import javax.swing.ImageIcon;
@@ -22,6 +20,7 @@ import model.structure.Dino;
 import model.structure.Figures;
 import pictures.Pictures;
 import model.Manager;
+import model.States;
 import pictures.ImageLoader;
 
 /**
@@ -35,7 +34,6 @@ public class GamePanel extends JPanel implements ActionListener, IObserver{
     private Dino dino;
     private Manager manager;
     private pictures.ImageLoader loader;
-    private boolean actionFlag;
     private List <Figures> enemies;
     private int level;
     private int score;
@@ -52,12 +50,11 @@ public class GamePanel extends JPanel implements ActionListener, IObserver{
         this.loader     = ImageLoader.getInstance();
         this.gameTime   = new Timer(30, this);
         this.gameTime.start();
-        this.actionFlag = false;
         this.setSize(1500, 1000);
         this.setDoubleBuffered(true);
         this.setIgnoreRepaint(true);
         this.manager.attach(this);
-        this.update();
+        this.update(States.LevelUpdate);
     }
 
     @Override
@@ -103,13 +100,12 @@ public class GamePanel extends JPanel implements ActionListener, IObserver{
     }
 
     @Override
-    public void update() {
-        this.level = this.manager.getLevel();
-        this.score = this.manager.getScore();
-    }
-    
-    private void checkStatus(){
-        if (manager.getKollissionsFlag()){
+    public void update(States state) {
+        if(state.equals(States.LevelUpdate)){
+            this.level = this.manager.getLevel();
+            this.score = this.manager.getScore();
+        }
+        else if(state.equals(States.GameOver)){
             this.gameTime.stop();
             this.manager.stop();
         }

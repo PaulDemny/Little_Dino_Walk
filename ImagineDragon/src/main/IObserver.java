@@ -5,10 +5,12 @@
  */
 package main;
 
+import model.States;
+
 /**
  *
  * @author Paul
  */
 public interface IObserver {
-    void update();
+    void update(States states);
 }

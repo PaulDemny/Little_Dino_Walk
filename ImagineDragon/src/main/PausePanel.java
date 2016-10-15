@@ -55,8 +55,13 @@ public class PausePanel extends JPanel implements ActionListener{
 
     @Override
     public void actionPerformed(ActionEvent e) {
-        if(e.getSource() == resume){
+        if(e.getSource().equals(resume)){
+            this.setFocusable(false);
             game.killPause();
+        }
+        
+        if(e.getSource().equals(end)){
+            game.finish();
         }
     }
 }
