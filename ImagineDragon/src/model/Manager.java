@@ -60,7 +60,7 @@ public class Manager{
         this.rnd             = new Random();
         this.gameVelocity    = 15;
         this.intervallCreate = 30;
-        this.level           = 20;
+        this.level           = 1;
         this.levelIncrement  = 0;
         this.score           = 0;
         this.dino            = (Dino) this.factory.factFigure(Names.Names.Dino, this.gameVelocity);
