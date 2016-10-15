@@ -5,11 +5,10 @@
  */
 package model.structure;
 
-import java.awt.Image;
 import java.awt.Rectangle;
 
 /**
- *
+ * abstractio layer for enemies
  * @author Paul
  */
 abstract class Enemy extends Figures{
@@ -17,10 +16,10 @@ abstract class Enemy extends Figures{
     protected int velocity;
 
     /**
-     * 
-     * @param rect
-     * @param velocity
-     * @param img 
+     * constructor of the abstract enemy
+     * @param rect rectangle for kollission
+     * @param velocity velocity for movement
+     * @param img image flag
      */
     public Enemy(Rectangle rect, int velocity, pictures.Pictures img) {
         super(rect, img);
@@ -28,8 +27,8 @@ abstract class Enemy extends Figures{
     }
 
     /**
-     * 
-     * @param direction 
+     * overwritte move method
+     * @param direction velocity of movement
      */
     @Override
     public void move(int direction){

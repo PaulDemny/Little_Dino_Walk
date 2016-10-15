@@ -5,20 +5,19 @@
  */
 package model.structure;
 
-import java.awt.Image;
 import java.awt.Rectangle;
 
 /**
- *
+ * class for middle enemy
  * @author Paul
  */
 class Middle extends Enemy{
 
     /**
-     * 
-     * @param rect
-     * @param velocity
-     * @param img 
+     * constructor for a middle enemy
+     * @param rect rectangle for kollission
+     * @param velocity velocity of the movement
+     * @param img image flag
      */
     public Middle(Rectangle rect, int velocity, pictures.Pictures img) {
         super(rect, velocity, img);

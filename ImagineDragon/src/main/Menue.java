@@ -8,15 +8,11 @@ package main;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import javax.swing.ImageIcon;
-import javax.swing.JFrame;
 import javax.swing.JLabel;
-import java.awt.event.KeyAdapter;
-import java.awt.event.KeyEvent;
-import java.awt.event.KeyListener;
 import pictures.Pictures;
 
 /**
- *
+ * Main menue
  * @author Paul
  */
 public class Menue extends javax.swing.JFrame implements ActionListener{
@@ -105,11 +101,13 @@ public class Menue extends javax.swing.JFrame implements ActionListener{
                 .addGap(116, 116, 116))
         );
 
+        spielen.getAccessibleContext().setAccessibleDescription("");
+
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
     /**
-     *  
+     *  inits the form
      */
     public void init(){
         this.loader = pictures.ImageLoader.getInstance();
@@ -169,33 +167,33 @@ public class Menue extends javax.swing.JFrame implements ActionListener{
     // End of variables declaration//GEN-END:variables
 
     /**
-     * 
-     * @param e 
+     * KeyListener
+     * @param e ActionEvent
      */
     @Override
     public void actionPerformed(ActionEvent e) {
-        if (e.getSource() == anleitung){
+        if (e.getSource().equals(anleitung)){
             Instructions anleitung = new Instructions();
             player.stop();
             this.setVisible(false);
             anleitung.setVisible(true);
         }
         
-        if (e.getSource() == spielen){
+        if (e.getSource().equals(spielen)){
             player.stop();
             this.setVisible(false);
             Game game = new Game();
             game.setVisible(true);
         }
         
-        if (e.getSource() == highscore){
+        if (e.getSource().equals(highscore)){
             Highscore score = new Highscore();
             player.stop();
             this.setVisible(false);
             score.setVisible(true);
         }
         
-        if (e.getSource() == schließen){
+        if (e.getSource().equals(schließen)){
             player.stop();
             this.setVisible(false);
             System.exit(0);

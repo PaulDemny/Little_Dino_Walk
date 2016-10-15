@@ -24,7 +24,7 @@ import model.States;
 import pictures.ImageLoader;
 
 /**
- *
+ * panel contains the gameover
  * @author Paul
  */
 public class GamePanel extends JPanel implements ActionListener, IObserver{
@@ -39,14 +39,17 @@ public class GamePanel extends JPanel implements ActionListener, IObserver{
     private int score;
     
     /**
-     * 
+     * Constructor of the Gamepanel
      */
     public GamePanel(){
         this.init();
     }
     
+    /**
+     * inits view
+     */
     private void init(){
-        this.manager    = Manager.getInstance();
+        this.manager = Manager.getInstance();
         this.loader     = ImageLoader.getInstance();
         this.gameTime   = new Timer(30, this);
         this.gameTime.start();
@@ -57,6 +60,10 @@ public class GamePanel extends JPanel implements ActionListener, IObserver{
         this.update(States.LevelUpdate);
     }
 
+    /**
+     * rendering method
+     * @param graph Graphics object of the panel
+     */
     @Override
     public void paintComponent(Graphics graph) {
         super.paintComponent(graph);
@@ -66,39 +73,56 @@ public class GamePanel extends JPanel implements ActionListener, IObserver{
         plainMdl.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
         plainMdl.drawImage(loader.getImage(Pictures.Desert), manager.getBackRect().x, manager.getBackRect().y, null);
         icon = loader.getImageIcon(Pictures.Dino);
-        icon.paintIcon(this, plainMdl, dino.getRect().x, dino.getRect().y);
+        icon.paintIcon(this, plainMdl, dino.getRect().x - 60, dino.getRect().y);
         for (int i = 0; i < enemies.size(); i++){
             plainMdl.drawImage(loader.getImage(enemies.get(i).getImage()), enemies.get(i).getRect().x, enemies.get(i).getRect().y, null);
         }
-        plainMdl.setFont(new Font(Font.SERIF, Font.BOLD, 50));
+        plainMdl.setFont(new Font(Font.MONOSPACED, Font.BOLD, 50));
         plainMdl.setColor(Color.red);
-        plainMdl.drawString("Level: " + String.valueOf(this.level), 20, 50);
-        plainMdl.drawString("Score: " + String.valueOf(this.score), 300, 50);
+        plainMdl.drawString("Level: ".concat(String.valueOf(this.level)).concat("   Score: ").concat(String.valueOf(this.score)), 20, 50);
         plainMdl.dispose();
    }
 
+    /**
+     * stops the rendering loop
+     */
     public void stopTimer(){
         if(gameTime.isRunning()){
             gameTime.stop();
         }
     }
     
+    /**
+     * starts the rendering loop
+     */
     public void startTimer(){
         if (!gameTime.isRunning()){
             gameTime.start();
         }
     }
     
+    /**
+     * event call of the rendering loop
+     * @param e ActionEvent
+     */
     @Override
     public void actionPerformed(ActionEvent e) {
         repaint();
     }
 
+    /**
+     * Overide the update method, background will not be deleted
+     * @param g Graphics object of the panel
+     */
     @Override
     public void update(Graphics g) {
         paint(g);
     }
 
+    /**
+     * update methode of the observer pattern
+     * @param state state for state machine
+     */
     @Override
     public void update(States state) {
         if(state.equals(States.LevelUpdate)){

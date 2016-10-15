@@ -6,11 +6,10 @@
 package model.structure;
 
 import java.awt.Rectangle;
-import java.util.Random;
 import pictures.Pictures;
 
 /**
- *
+ * factory of factory method pattern
  * @author Paul
  */
 public class FigureFactory {
@@ -20,25 +19,25 @@ public class FigureFactory {
     private pictures.ImageLoader loader;
 
     /**
-     * 
+     * constructor of the figure factory
      */
     private FigureFactory(){
         loader = pictures.ImageLoader.getInstance();
     }
 
     /**
-     * 
-     * @return 
+     * Singleton pattern instance method
+     * @return static instance of figure factory
      */
     public static FigureFactory getInstance(){
         return figureFactory;
     }
 
     /**
-     * 
-     * @param objectName
-     * @param velocity
-     * @return 
+     * method creates a new figure
+     * @param objectName flag for the stata machine 
+     * @param velocity move velocity of the new figure
+     * @return new figure
      */
     public Figures factFigure(Names objectName, int velocity){
         
@@ -50,19 +49,19 @@ public class FigureFactory {
                 break;
                 
             case Dino:
-                newfig = new Dino(new Rectangle(0, 750, loader.getImageIcon(Pictures.Dino).getIconWidth(), loader.getImageIcon(Pictures.Dino).getIconHeight()), Pictures.Dino);
+                newfig = new Dino(new Rectangle(70, 200, loader.getImageIcon(Pictures.Dino).getIconWidth() - 120, loader.getImageIcon(Pictures.Dino).getIconHeight()), Pictures.Dino);
                 break;
              
             case Large:
-                newfig = new Large(new Rectangle(1500, 650 /*+ rnd.nextInt(200)*/ , loader.getImage(Pictures.Large).getWidth(null), loader.getImage(Pictures.Large).getHeight(null)), velocity, Pictures.Large);
+                newfig = new Large(new Rectangle(1500, 650 , loader.getImage(Pictures.Large).getWidth(null), loader.getImage(Pictures.Large).getHeight(null)), velocity, Pictures.Large);
                 break;
             
             case Middle:
-                newfig = new Middle(new Rectangle(1500, 650 /*+ rnd.nextInt(50)*/, loader.getImage(Pictures.Middle).getWidth(null), loader.getImage(Pictures.Middle).getHeight(null)), velocity, Pictures.Middle);
+                newfig = new Middle(new Rectangle(1500, 650, loader.getImage(Pictures.Middle).getWidth(null), loader.getImage(Pictures.Middle).getHeight(null)), velocity, Pictures.Middle);
                 break;
                 
             case Small:
-                newfig = new Small(new Rectangle(1500, 750/* + rnd.nextInt(100) */, loader.getImage(Pictures.Small).getWidth(null), loader.getImage(Pictures.Small).getHeight(null)), velocity, Pictures.Small);
+                newfig = new Small(new Rectangle(1500, 750, loader.getImage(Pictures.Small).getWidth(null), loader.getImage(Pictures.Small).getHeight(null)), velocity, Pictures.Small);
                 break;
         }
         return newfig;

@@ -6,7 +6,7 @@
 package model.structure;
 
 /**
- *
+ * enum for the state machine
  * @author Paul
  */
 public enum Names {

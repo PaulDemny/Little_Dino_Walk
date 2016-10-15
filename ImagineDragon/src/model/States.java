@@ -6,7 +6,7 @@
 package model;
 
 /**
- *
+ * states for the observer pattern
  * @author Paul
  */
 public enum States {

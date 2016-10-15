@@ -5,20 +5,19 @@
  */
 package model.structure;
 
-import java.awt.Image;
 import java.awt.Rectangle;
 
 /**
- *
+ * class for a small enemy
  * @author Paul
  */
 class Small extends Enemy{
 
     /**
-     * 
-     * @param rect
-     * @param velocity
-     * @param img 
+     * constructor for a little enemy
+     * @param rect rectangle for kollission
+     * @param velocity velocity of the movement
+     * @param img image flag
      */
     public Small(Rectangle rect, int velocity, pictures.Pictures img) {
         super(rect, velocity, img);

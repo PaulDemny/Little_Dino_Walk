@@ -11,10 +11,8 @@ import java.io.IOException;
 import javax.imageio.ImageIO;
 import javax.swing.ImageIcon;
 
-
-
 /**
- *
+ * class for imageloader 
  * @author Paul
  */
 public class ImageLoader {
@@ -31,11 +29,16 @@ public class ImageLoader {
     private ImageIcon roar              = null;
     private ImageIcon dino              = null;
     
-    
+    /**
+     * constructor for imageloader
+     */
     private ImageLoader(){
         initLoader();
     }
     
+    /**
+     * inits the loader
+     */
     private void initLoader(){
         try{
             this.background = ImageIO.read(getClass().getClassLoader().getResource("pictures/files/panel.png"));
@@ -55,10 +58,19 @@ public class ImageLoader {
         
     }
     
+    /**
+     * getInstance for the singleton pattern
+     * @return instance of the loader 
+     */
     public static ImageLoader getInstance(){
         return imageLoaderInstance;
     }
     
+    /**
+     * factory method
+     * @param imageName flag for state machine
+     * @return returns image
+     */
     public Image getImage(pictures.Pictures imageName){
         Image imageInstance = null;
         
@@ -88,7 +100,12 @@ public class ImageLoader {
         return imageInstance;
     }
     
-    public ImageIcon getImageIcon(pictures.Pictures iconName){
+    /**
+     * second factory method
+     * @param iconName flag for the state machine
+     * @return return animated pictures
+     */
+    public ImageIcon getImageIcon(Pictures iconName){
         
         ImageIcon iconInstance = null;
         

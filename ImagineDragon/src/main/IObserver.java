@@ -8,9 +8,14 @@ package main;
 import model.States;
 
 /**
- *
+ * Oberserver interface
  * @author Paul
  */
 public interface IObserver {
+    
+    /**
+     * update methode of the observer pattern
+     * @param states state of the state machine
+     */
     void update(States states);
 }

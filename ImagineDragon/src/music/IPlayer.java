@@ -6,15 +6,18 @@
 package music;
 
 /**
- *
+ * interface for the player
  * @author Paul
  */
 public interface IPlayer {
     
-    
+    /**
+     * play music
+     */
     void play();
     
-    
-    
+    /**
+     * stop music
+     */
     void stop();
 }

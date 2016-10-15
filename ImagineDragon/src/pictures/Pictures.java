@@ -6,7 +6,7 @@
 package pictures;
 
 /**
- *
+ * state machine flas
  * @author Paul
  */
 public enum Pictures {

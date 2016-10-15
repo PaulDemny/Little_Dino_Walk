@@ -7,7 +7,7 @@ package model.structure;
 
 import java.awt.Rectangle;
 /**
- *
+ * calss for dino object
  * @author Paul
  */
 public class Dino extends Figures{
@@ -19,9 +19,9 @@ public class Dino extends Figures{
     private boolean movement;
 
     /**
-     * 
-     * @param rect
-     * @param img 
+     * constructor for the dino
+     * @param rect Ractangle for the kollission
+     * @param img image flag
      */
     public Dino(Rectangle rect, pictures.Pictures img) {
         super(rect, img);
@@ -32,14 +32,14 @@ public class Dino extends Figures{
     }
 
     /**
-     * 
+     * kills dino movement
      */
     public void killDino(){
         this.movement = false;
     }
 
     /**
-     * 
+     * Timertask of the jump
      */
     private void task(){
         if(this.rect.y > 200 && this.rect.x < 1200){
@@ -53,8 +53,8 @@ public class Dino extends Figures{
     }
 
     /**
-     * 
-     * @param direction 
+     * setter of the dino velocity
+     * @param direction velocity of the movement
      */
     @Override
     public void move(int direction) {
@@ -62,7 +62,7 @@ public class Dino extends Figures{
     }
 
     /**
-     * 
+     * method creates new jump thread
      */
     public void jump(){
         this.jump = new Thread(){
@@ -84,10 +84,16 @@ public class Dino extends Figures{
         this.zenit = false;
     }
     
+    /**
+     * method stops jump
+     */
     public void resetZenit(){
         this.zenit = true;
     }
     
+    /**
+     * inits dino
+     */
     public void startDino(){
         this.walking = new Thread(){
             @Override

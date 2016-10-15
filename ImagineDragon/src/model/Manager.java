@@ -20,7 +20,7 @@ import pictures.ImageLoader;
 import model.structure.Figures;
 
 /**
- *
+ * manger of the model 
  * @author Paul
  */
 public class Manager{
@@ -34,7 +34,6 @@ public class Manager{
     private Timer delayJump;
     private TimerTask task;
     private TimerTask passsive;
-    private TimerTask delay;
     private int gameVelocity;
     private int intervallCreate;
     private List <Figures> enemies;
@@ -48,13 +47,13 @@ public class Manager{
     private int score;
 
     /**
-     * 
+     * constructor of the manager
      */
     private Manager(){
     }    
 
     /**
-     * 
+     * inits the manager
      */
     public void init(){
         this.factory         = FigureFactory.getInstance();
@@ -75,15 +74,15 @@ public class Manager{
     }
 
     /**
-     * 
-     * @return 
+     * Instance for the singleton pattern
+     * @return static manager instance
      */
     public static Manager getInstance(){
         return Manager.manager;
     }
 
     /**
-     * 
+     * starts all timers
      */
     public void start(){
       this.managerTime     = new Timer();
@@ -110,7 +109,7 @@ public class Manager{
     }
 
     /**
-     * 
+     * stops all timers
      */
     public void stop(){
         this.managerTime.cancel();
@@ -119,7 +118,7 @@ public class Manager{
     }
 
     /**
-     * 
+     * products all enemies
      */
     private void factEnemies(){
         this.raiseLevelCheck();
@@ -145,6 +144,9 @@ public class Manager{
         }
     }
     
+    /**
+     * produces a small enemy
+     */
     private void addSmall(){
         switch(this.rnd.nextInt(10)){
             case 0: case 2: case 4: case 6:case 8:
@@ -153,6 +155,9 @@ public class Manager{
         }
     }
     
+    /**
+     * produces a middle enemy
+     */
     private void addMiddle(){
             switch(rnd.nextInt(20)){
                 case 0: case 5: case 10: case 15: case 19:
@@ -161,6 +166,9 @@ public class Manager{
             }
     }
     
+    /**
+     * produces a large enemy
+     */
     private void addLarge(){
         switch(rnd.nextInt(30)){
             case 0: case 5: case 10: case 15: case 20: case 25:
@@ -169,6 +177,9 @@ public class Manager{
         }
     }
     
+    /**
+     * raises the level
+     */
     private void raiseLevelCheck(){
         this.levelIncrement++;
         if (this.levelIncrement > 60) {
@@ -179,7 +190,7 @@ public class Manager{
     }
 
     /**
-     * 
+     * calls the move method of all enemies and the dino
      */
     private void move(){
         this.killEnemies();
@@ -199,34 +210,37 @@ public class Manager{
     }
 
     /**
-     * 
-     * @return 
+     * dino getter
+     * @return dino of the model
      */
     public Dino getDino(){
         return this.dino;
     }
 
     /**
-     * 
-     * @return 
+     * enemy list getter
+     * @return enemy list
      */
     public List <Figures> getEnemies(){
          return this.enemies;
     }
 
     /**
-     * 
+     * forward method
      */
     public void forward(){
         this.dino.move(15);
     }
     
+    /**
+     * reverse method
+     */
     public void revers(){
         this.dino.move(-15);
     }
 
     /**
-     * 
+     * inits a jump in the model
      */
     public void jump(){
         if(!this.delayFlag){
@@ -242,13 +256,17 @@ public class Manager{
     }
 
     /**
-     * 
-     * @return 
+     * getter for the background rectangle
+     * @return rectangle of background
      */
     public Rectangle getBackRect(){
         return this.backRect;
     }
     
+    /**
+     * checks for kollission
+     * @return true if kollission happened
+     */
     private boolean kolission(){
         boolean kollission = false;
         for (int i = 0; i < enemies.size(); i++){
@@ -260,24 +278,23 @@ public class Manager{
     }
 
     /**
-     * 
+     * dino model does not move
      */
     public void still() {
         this.dino.move(0);
     }
 
+    /**
+     * getter for the level
+     * @return level of the model
+     */
     public int getLevel() {
         return this.level;
     }
-    
-    /**
-     * 
-     * @return 
-     */
-    public boolean getKollissionsFlag(){
-        return this.kolissionFlag;
-    }
 
+    /**
+     * kills the nemeys that are not visible
+     */
     private void killEnemies(){
         for(int i = 0; i < this.enemies.size(); i++){
             if(this.enemies.get(i).getRect().x < -100){
@@ -288,18 +305,33 @@ public class Manager{
         this.notifyObservers(States.LevelUpdate);
     }
     
+    /**
+     * quits the jump of the dino
+     */
     public void quitJump(){
         this.dino.resetZenit();
     }
 
+    /**
+     * getter for the score
+     * @return score of the model
+     */
     public int getScore() {
         return this.score;
     }
     
+    /**
+     * attach method of the observer pattern
+     * @param observer observer to attach
+     */
     public void attach(IObserver observer){
         this.observers.add(observer);
     }
     
+    /**
+     * notification method of the observer pattern
+     * @param state state for the state machine
+     */
     private void notifyObservers(States state){
         for (int i = 0; i < this.observers.size(); i++){
             this.observers.get(i).update(state);

@@ -6,15 +6,14 @@
 package model.structure;
 
 /**
- *
+ * interface of the model structure
  * @author Paul
  */
 public interface IMovable {
 
     /**
-     * 
-     * @param direction 
+     * move method
+     * @param direction direction of the movement
      */
     void move(int direction);
-    
 }

@@ -14,7 +14,7 @@ import music.MP3Player;
 
 
 /**
- *
+ * form and controller
  * @author Paul
  */
 public class Game extends javax.swing.JFrame implements IObserver{
@@ -27,8 +27,8 @@ public class Game extends javax.swing.JFrame implements IObserver{
     
 //    static {
 //    System.setProperty("sun.java2d.transaccel", "True");
-//    // System.setProperty("sun.java2d.trace", "timestamp,log,count");
-//    // System.setProperty("sun.java2d.opengl", "True");
+//    System.setProperty("sun.java2d.trace", "timestamp,log,count");
+//    System.setProperty("sun.java2d.opengl", "True");
 //    System.setProperty("sun.java2d.d3d", "True");
 //    System.setProperty("sun.java2d.ddforcevram", "True");
 //    }
@@ -86,7 +86,7 @@ public class Game extends javax.swing.JFrame implements IObserver{
                     manager.forward();
                 }
                 
-                if (key == KeyEvent.VK_SPACE || key == KeyEvent.VK_W){
+                if (key == KeyEvent.VK_SPACE || key == KeyEvent.VK_W || key == KeyEvent.VK_UP){
                     manager.jump();
                 }
                 
@@ -111,7 +111,7 @@ public class Game extends javax.swing.JFrame implements IObserver{
                 if (key == KeyEvent.VK_LEFT || key == KeyEvent.VK_RIGHT || key == KeyEvent.VK_A || key == KeyEvent.VK_D){
                     manager.still();
                 }
-                if(key == KeyEvent.VK_SPACE || key == KeyEvent.VK_W){
+                if(key == KeyEvent.VK_SPACE || key == KeyEvent.VK_W || key == KeyEvent.VK_UP){
                     manager.quitJump();
                 }
             }
@@ -121,6 +121,9 @@ public class Game extends javax.swing.JFrame implements IObserver{
         
     }
     
+    /**
+     * Kills the Pausepanel
+     */
     public void killPause(){
         this.setFocusable(true);
         player.stop();
@@ -134,19 +137,30 @@ public class Game extends javax.swing.JFrame implements IObserver{
         repaint();
     }
     
+    /**
+     * 
+     * @return the player instance
+     */
     public MP3Player getPlayer(){
         return player;
     }
     
+    /**
+     * finishes the the game and open the menue
+     */
     public void finish(){
         this.player.stop();
         this.painting.stopTimer();
         this.manager.stop();
         this.setVisible(false);
+        this.dispose();
         Menue menue = new Menue();
         menue.setVisible(true);
     }
     
+    /**
+     * show the Gameoverpanel
+     */
     public void showGameOver(){
         player.stop();
         painting.stopTimer();
@@ -157,6 +171,10 @@ public class Game extends javax.swing.JFrame implements IObserver{
         repaint();
     }
 
+    /**
+     * 
+     * @param state this parameter signals and modifys the update method
+     */
     @Override
     public void update(States state) {
         if(state.equals(States.GameOver)){

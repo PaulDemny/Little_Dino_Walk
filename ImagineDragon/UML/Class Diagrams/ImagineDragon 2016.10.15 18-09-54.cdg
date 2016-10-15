@@ -1,0 +1,519 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<ClassDiagram name="ImagineDragon">
+  <ClassDiagramComponents>
+    <Class name="Game" package="main" visibility="public" xPosition="1558.0" yPosition="77.0">
+      <Fields>
+        <Field name="manager" type="Manager" visibility="private"/>
+        <Field name="player" type="MP3Player" visibility="private"/>
+        <Field name="painting" type="GamePanel" visibility="private"/>
+        <Field name="pause" type="PausePanel" visibility="private"/>
+        <Field name="gameOver" type="GameOverPanel" visibility="private"/>
+      </Fields>
+      <Constructors>
+        <Constructor visibility="public"/>
+      </Constructors>
+      <Methods>
+        <Method name="killPause" returnType="void" visibility="public"/>
+        <Method name="getPlayer" returnType="MP3Player" visibility="public"/>
+        <Method name="finish" returnType="void" visibility="public"/>
+        <Method name="showGameOver" returnType="void" visibility="public"/>
+        <Method name="update" returnType="void" visibility="public">
+          <Argument type="States" name="state"/>
+        </Method>
+        <Method name="initComponents" returnType="// &lt;editor-fold defaultstate=&quot;collapsed&quot; desc=&quot;Generated Code&quot;&gt;//GEN-BEGIN:initComponents void" visibility="private"/>
+        <Method name="main" returnType="void" visibility="public" isStatic="true">
+          <Argument type="String" name="args"/>
+        </Method>
+      </Methods>
+    </Class>
+    <Class name="GameOverPanel" package="main" visibility="public" xPosition="133.0" yPosition="274.0">
+      <Fields>
+        <Field name="loader" type="ImageLoader" visibility="private"/>
+        <Field name="save" type="JButton" visibility="private"/>
+        <Field name="quit" type="JButton" visibility="private"/>
+        <Field name="name" type="JTextField" visibility="private"/>
+        <Field name="game" type="Game" visibility="private"/>
+        <Field name="manager" type="Manager" visibility="private"/>
+        <Field name="connect" type="Connection" visibility="private"/>
+        <Field name="order" type="Statement" visibility="private"/>
+        <Field name="input" type="String" visibility="private"/>
+      </Fields>
+      <Constructors>
+        <Constructor visibility="public">
+          <Argument type="Game" name="game"/>
+        </Constructor>
+      </Constructors>
+      <Methods>
+        <Method name="init" returnType="void" visibility="private"/>
+        <Method name="paintComponent" returnType="void" visibility="public">
+          <Argument type="Graphics" name="g"/>
+        </Method>
+        <Method name="actionPerformed" returnType="void" visibility="public">
+          <Argument type="ActionEvent" name="e"/>
+        </Method>
+      </Methods>
+    </Class>
+    <Class name="GamePanel" package="main" visibility="public" xPosition="2693.0" yPosition="1170.0">
+      <Fields>
+        <Field name="gameTime" type="Timer" visibility="private"/>
+        <Field name="icon" type="ImageIcon" visibility="private"/>
+        <Field name="dino" type="Dino" visibility="private"/>
+        <Field name="manager" type="Manager" visibility="private"/>
+        <Field name="loader" type="pictures.ImageLoader" visibility="private"/>
+        <Field name="enemies" type="List&lt;Figures&gt;" visibility="private"/>
+        <Field name="level" type="int" visibility="private"/>
+        <Field name="score" type="int" visibility="private"/>
+      </Fields>
+      <Constructors>
+        <Constructor visibility="public"/>
+      </Constructors>
+      <Methods>
+        <Method name="init" returnType="void" visibility="private"/>
+        <Method name="paintComponent" returnType="void" visibility="public">
+          <Argument type="Graphics" name="graph"/>
+        </Method>
+        <Method name="stopTimer" returnType="void" visibility="public"/>
+        <Method name="startTimer" returnType="void" visibility="public"/>
+        <Method name="actionPerformed" returnType="void" visibility="public">
+          <Argument type="ActionEvent" name="e"/>
+        </Method>
+        <Method name="update" returnType="void" visibility="public">
+          <Argument type="Graphics" name="g"/>
+        </Method>
+        <Method name="update" returnType="void" visibility="public">
+          <Argument type="States" name="state"/>
+        </Method>
+      </Methods>
+    </Class>
+    <Class name="Highscore" package="main" visibility="public" xPosition="724.0" yPosition="99.0">
+      <Fields>
+        <Field name="loader" type="pictures.ImageLoader" visibility="private"/>
+        <Field name="player" type="music.MP3Player" visibility="private"/>
+        <Field name="connect" type="Connection" visibility="private"/>
+        <Field name="order" type="Statement" visibility="private"/>
+        <Field name="statement" type="String" visibility="private"/>
+        <Field name="result" type="ResultSet" visibility="private"/>
+        <Field name="output" type="String" visibility="private"/>
+        <Field name="place" type="byte" visibility="private"/>
+        <Field name="close" type="javax.swing.JButton" visibility="private"/>
+        <Field name="highscoreView" type="javax.swing.JLabel" visibility="private"/>
+        <Field name="jLabel1" type="javax.swing.JLabel" visibility="private"/>
+      </Fields>
+      <Constructors>
+        <Constructor visibility="public"/>
+      </Constructors>
+      <Methods>
+        <Method name="init" returnType="void" visibility="private"/>
+        <Method name="initComponents" returnType="// &lt;editor-fold defaultstate=&quot;collapsed&quot; desc=&quot;Generated Code&quot;&gt;//GEN-BEGIN:initComponents void" visibility="private"/>
+        <Method name="main" returnType="void" visibility="public" isStatic="true">
+          <Argument type="String" name="args"/>
+        </Method>
+        <Method name="actionPerformed" returnType="void" visibility="public">
+          <Argument type="ActionEvent" name="e"/>
+        </Method>
+      </Methods>
+    </Class>
+    <Class name="Instructions" package="main" visibility="public" xPosition="4675.0" yPosition="116.0">
+      <Fields>
+        <Field name="loader" type="pictures.ImageLoader" visibility="private"/>
+        <Field name="player" type="music.MP3Player" visibility="private"/>
+        <Field name="close" type="javax.swing.JButton" visibility="private"/>
+        <Field name="jLabel1" type="javax.swing.JLabel" visibility="private"/>
+        <Field name="jLabel10" type="javax.swing.JLabel" visibility="private"/>
+        <Field name="jLabel11" type="javax.swing.JLabel" visibility="private"/>
+        <Field name="jLabel12" type="javax.swing.JLabel" visibility="private"/>
+        <Field name="jLabel13" type="javax.swing.JLabel" visibility="private"/>
+        <Field name="jLabel14" type="javax.swing.JLabel" visibility="private"/>
+        <Field name="jLabel2" type="javax.swing.JLabel" visibility="private"/>
+        <Field name="jLabel3" type="javax.swing.JLabel" visibility="private"/>
+        <Field name="jLabel4" type="javax.swing.JLabel" visibility="private"/>
+        <Field name="jLabel5" type="javax.swing.JLabel" visibility="private"/>
+        <Field name="jLabel6" type="javax.swing.JLabel" visibility="private"/>
+        <Field name="jLabel7" type="javax.swing.JLabel" visibility="private"/>
+        <Field name="jLabel8" type="javax.swing.JLabel" visibility="private"/>
+        <Field name="jLabel9" type="javax.swing.JLabel" visibility="private"/>
+      </Fields>
+      <Constructors>
+        <Constructor visibility="public"/>
+      </Constructors>
+      <Methods>
+        <Method name="init" returnType="void" visibility="public"/>
+        <Method name="initComponents" returnType="// &lt;editor-fold defaultstate=&quot;collapsed&quot; desc=&quot;Generated Code&quot;&gt;//GEN-BEGIN:initComponents void" visibility="private"/>
+        <Method name="main" returnType="void" visibility="public" isStatic="true">
+          <Argument type="String" name="args"/>
+        </Method>
+        <Method name="actionPerformed" returnType="void" visibility="public">
+          <Argument type="ActionEvent" name="e"/>
+        </Method>
+      </Methods>
+    </Class>
+    <Class name="Menue" package="main" visibility="public" xPosition="3752.0" yPosition="252.0">
+      <Fields>
+        <Field name="icon" type="ImageIcon" visibility="private"/>
+        <Field name="dino" type="JLabel" visibility="private"/>
+        <Field name="player" type="music.MP3Player" visibility="private"/>
+        <Field name="loader" type="pictures.ImageLoader" visibility="private"/>
+        <Field name="anleitung" type="javax.swing.JButton" visibility="private"/>
+        <Field name="highscore" type="javax.swing.JButton" visibility="private"/>
+        <Field name="jLabel1" type="javax.swing.JLabel" visibility="private"/>
+        <Field name="schlieÃŸen" type="javax.swing.JButton" visibility="private"/>
+        <Field name="spielen" type="javax.swing.JButton" visibility="private"/>
+      </Fields>
+      <Constructors>
+        <Constructor visibility="public"/>
+      </Constructors>
+      <Methods>
+        <Method name="initComponents" returnType="// &lt;editor-fold defaultstate=&quot;collapsed&quot; desc=&quot;Generated Code&quot;&gt;//GEN-BEGIN:initComponents void" visibility="private"/>
+        <Method name="init" returnType="void" visibility="public"/>
+        <Method name="main" returnType="void" visibility="public" isStatic="true">
+          <Argument type="String" name="args"/>
+        </Method>
+        <Method name="actionPerformed" returnType="void" visibility="public">
+          <Argument type="ActionEvent" name="e"/>
+        </Method>
+      </Methods>
+    </Class>
+    <Class name="PausePanel" package="main" visibility="public" xPosition="2560.0" yPosition="2374.0">
+      <Fields>
+        <Field name="loader" type="ImageLoader" visibility="private"/>
+        <Field name="resume" type="JButton" visibility="private"/>
+        <Field name="end" type="JButton" visibility="private"/>
+        <Field name="game" type="Game" visibility="private"/>
+        <Field name="manager" type="Manager" visibility="private"/>
+      </Fields>
+      <Constructors>
+        <Constructor visibility="public">
+          <Argument type="Game" name="game"/>
+        </Constructor>
+      </Constructors>
+      <Methods>
+        <Method name="init" returnType="void" visibility="private"/>
+        <Method name="paintComponent" returnType="void" visibility="public">
+          <Argument type="Graphics" name="g"/>
+        </Method>
+        <Method name="actionPerformed" returnType="void" visibility="public">
+          <Argument type="ActionEvent" name="e"/>
+        </Method>
+      </Methods>
+    </Class>
+    <Class name="Manager" package="model" visibility="public" xPosition="2574.0" yPosition="140.0">
+      <Fields>
+        <Field name="manager" type="Manager" visibility="private" isStatic="true"/>
+        <Field name="factory" type="FigureFactory" visibility="private"/>
+        <Field name="loader" type="ImageLoader" visibility="private"/>
+        <Field name="dino" type="Dino" visibility="private"/>
+        <Field name="managerTime" type="Timer" visibility="private"/>
+        <Field name="enemyTime" type="Timer" visibility="private"/>
+        <Field name="delayJump" type="Timer" visibility="private"/>
+        <Field name="task" type="TimerTask" visibility="private"/>
+        <Field name="passsive" type="TimerTask" visibility="private"/>
+        <Field name="gameVelocity" type="int" visibility="private"/>
+        <Field name="intervallCreate" type="int" visibility="private"/>
+        <Field name="enemies" type="List&lt;Figures&gt;" visibility="private"/>
+        <Field name="observers" type="List&lt;IObserver&gt;" visibility="private"/>
+        <Field name="backRect" type="Rectangle" visibility="private"/>
+        <Field name="level" type="int" visibility="private"/>
+        <Field name="kolissionFlag" type="boolean" visibility="private"/>
+        <Field name="delayFlag" type="boolean" visibility="private" isTransient="true"/>
+        <Field name="rnd" type="Random" visibility="private"/>
+        <Field name="levelIncrement" type="int" visibility="private"/>
+        <Field name="score" type="int" visibility="private"/>
+      </Fields>
+      <Constructors>
+        <Constructor visibility="private"/>
+      </Constructors>
+      <Methods>
+        <Method name="init" returnType="void" visibility="public"/>
+        <Method name="getInstance" returnType="Manager" visibility="public" isStatic="true"/>
+        <Method name="start" returnType="void" visibility="public"/>
+        <Method name="stop" returnType="void" visibility="public"/>
+        <Method name="factEnemies" returnType="void" visibility="private"/>
+        <Method name="addSmall" returnType="void" visibility="private"/>
+        <Method name="addMiddle" returnType="void" visibility="private"/>
+        <Method name="addLarge" returnType="void" visibility="private"/>
+        <Method name="raiseLevelCheck" returnType="void" visibility="private"/>
+        <Method name="move" returnType="void" visibility="private"/>
+        <Method name="getDino" returnType="Dino" visibility="public"/>
+        <Method name="getEnemies" returnType="List&lt;Figures&gt;" visibility="public"/>
+        <Method name="forward" returnType="void" visibility="public"/>
+        <Method name="revers" returnType="void" visibility="public"/>
+        <Method name="jump" returnType="void" visibility="public"/>
+        <Method name="getBackRect" returnType="Rectangle" visibility="public"/>
+        <Method name="kolission" returnType="boolean" visibility="private"/>
+        <Method name="still" returnType="void" visibility="public"/>
+        <Method name="getLevel" returnType="int" visibility="public"/>
+        <Method name="killEnemies" returnType="void" visibility="private"/>
+        <Method name="quitJump" returnType="void" visibility="public"/>
+        <Method name="getScore" returnType="int" visibility="public"/>
+        <Method name="attach" returnType="void" visibility="public">
+          <Argument type="IObserver" name="observer"/>
+        </Method>
+        <Method name="notifyObservers" returnType="void" visibility="private">
+          <Argument type="States" name="state"/>
+        </Method>
+      </Methods>
+    </Class>
+    <Class name="AntiDino" package="model.structure" visibility="public" xPosition="1787.0" yPosition="2215.0">
+      <Fields/>
+      <Constructors>
+        <Constructor visibility="public">
+          <Argument type="Rectangle" name="rect"/>
+          <Argument type="int" name="velocity"/>
+          <Argument type="pictures.Pictures" name="img"/>
+        </Constructor>
+      </Constructors>
+      <Methods/>
+    </Class>
+    <Class name="Dino" package="model.structure" visibility="public" xPosition="997.0" yPosition="1739.0">
+      <Fields>
+        <Field name="dinoVelocity" type="int" visibility="private" isTransient="true"/>
+        <Field name="jump" type="Thread" visibility="private"/>
+        <Field name="walking" type="Thread" visibility="private"/>
+        <Field name="zenit" type="boolean" visibility="private"/>
+        <Field name="movement" type="boolean" visibility="private"/>
+      </Fields>
+      <Constructors>
+        <Constructor visibility="public">
+          <Argument type="Rectangle" name="rect"/>
+          <Argument type="pictures.Pictures" name="img"/>
+        </Constructor>
+      </Constructors>
+      <Methods>
+        <Method name="killDino" returnType="void" visibility="public"/>
+        <Method name="task" returnType="void" visibility="private"/>
+        <Method name="move" returnType="void" visibility="public">
+          <Argument type="int" name="direction"/>
+        </Method>
+        <Method name="jump" returnType="void" visibility="public"/>
+        <Method name="resetZenit" returnType="void" visibility="public"/>
+        <Method name="startDino" returnType="void" visibility="public"/>
+      </Methods>
+    </Class>
+    <Class name="Enemy" package="model.structure" visibility="public" isAbstract="true" xPosition="1353.0" yPosition="2188.0">
+      <Fields>
+        <Field name="velocity" type="int" visibility="protected"/>
+      </Fields>
+      <Constructors>
+        <Constructor visibility="public">
+          <Argument type="Rectangle" name="rect"/>
+          <Argument type="int" name="velocity"/>
+          <Argument type="pictures.Pictures" name="img"/>
+        </Constructor>
+      </Constructors>
+      <Methods>
+        <Method name="move" returnType="void" visibility="public">
+          <Argument type="int" name="direction"/>
+        </Method>
+      </Methods>
+    </Class>
+    <Class name="FigureFactory" package="model.structure" visibility="public" xPosition="1520.0" yPosition="420.0">
+      <Fields>
+        <Field name="figureFactory" type="FigureFactory" visibility="private" isStatic="true"/>
+        <Field name="newfig" type="Figures" visibility="private"/>
+        <Field name="loader" type="pictures.ImageLoader" visibility="private"/>
+      </Fields>
+      <Constructors>
+        <Constructor visibility="private"/>
+      </Constructors>
+      <Methods>
+        <Method name="getInstance" returnType="FigureFactory" visibility="public" isStatic="true"/>
+        <Method name="factFigure" returnType="Figures" visibility="public">
+          <Argument type="Names" name="objectName"/>
+          <Argument type="int" name="velocity"/>
+        </Method>
+      </Methods>
+    </Class>
+    <Class name="Figures" package="model.structure" visibility="public" isAbstract="true" xPosition="1353.0" yPosition="1729.0">
+      <Fields>
+        <Field name="img" type="pictures.Pictures" visibility="private"/>
+        <Field name="rect" type="Rectangle" visibility="protected"/>
+      </Fields>
+      <Constructors>
+        <Constructor visibility="public">
+          <Argument type="Rectangle" name="rect"/>
+          <Argument type="pictures.Pictures" name="img"/>
+        </Constructor>
+      </Constructors>
+      <Methods>
+        <Method name="getImage" returnType="pictures.Pictures" visibility="public"/>
+        <Method name="getRect" returnType="Rectangle" visibility="public"/>
+        <Method name="move" returnType="void" visibility="public" isAbstract="true">
+          <Argument type="int" name="direction"/>
+        </Method>
+      </Methods>
+    </Class>
+    <Class name="Large" package="model.structure" visibility="public" xPosition="1773.0" yPosition="2475.0">
+      <Fields/>
+      <Constructors>
+        <Constructor visibility="public">
+          <Argument type="Rectangle" name="rect"/>
+          <Argument type="int" name="velocity"/>
+          <Argument type="pictures.Pictures" name="img"/>
+        </Constructor>
+      </Constructors>
+      <Methods/>
+    </Class>
+    <Class name="Middle" package="model.structure" visibility="public" xPosition="1355.0" yPosition="2628.0">
+      <Fields/>
+      <Constructors>
+        <Constructor visibility="public">
+          <Argument type="Rectangle" name="rect"/>
+          <Argument type="int" name="velocity"/>
+          <Argument type="pictures.Pictures" name="img"/>
+        </Constructor>
+      </Constructors>
+      <Methods/>
+    </Class>
+    <Class name="Small" package="model.structure" visibility="public" xPosition="940.0" yPosition="2475.0">
+      <Fields/>
+      <Constructors>
+        <Constructor visibility="public">
+          <Argument type="Rectangle" name="rect"/>
+          <Argument type="int" name="velocity"/>
+          <Argument type="pictures.Pictures" name="img"/>
+        </Constructor>
+      </Constructors>
+      <Methods/>
+    </Class>
+    <Class name="MP3Player" package="music" visibility="public" xPosition="1520.0" yPosition="820.0">
+      <Fields>
+        <Field name="player" type="Player" visibility="private"/>
+        <Field name="filename" type="String" visibility="private" isFinal="true"/>
+      </Fields>
+      <Constructors>
+        <Constructor visibility="public">
+          <Argument type="String" name="filename"/>
+        </Constructor>
+      </Constructors>
+      <Methods>
+        <Method name="play" returnType="void" visibility="public" isSynchronized="true"/>
+        <Method name="stop" returnType="void" visibility="public" isSynchronized="true"/>
+      </Methods>
+    </Class>
+    <Class name="ImageLoader" package="pictures" visibility="public" xPosition="3185.0" yPosition="1034.0">
+      <Fields>
+        <Field name="imageLoaderInstance" type="ImageLoader" visibility="private" isStatic="true"/>
+        <Field name="background" type="BufferedImage" visibility="private"/>
+        <Field name="large" type="BufferedImage" visibility="private"/>
+        <Field name="middle" type="BufferedImage" visibility="private"/>
+        <Field name="small" type="BufferedImage" visibility="private"/>
+        <Field name="normal" type="BufferedImage" visibility="private"/>
+        <Field name="antiDino" type="ImageIcon" visibility="private"/>
+        <Field name="roar" type="ImageIcon" visibility="private"/>
+        <Field name="dino" type="ImageIcon" visibility="private"/>
+      </Fields>
+      <Constructors>
+        <Constructor visibility="private"/>
+      </Constructors>
+      <Methods>
+        <Method name="initLoader" returnType="void" visibility="private"/>
+        <Method name="getInstance" returnType="ImageLoader" visibility="public" isStatic="true"/>
+        <Method name="getImage" returnType="Image" visibility="public">
+          <Argument type="pictures.Pictures" name="imageName"/>
+        </Method>
+        <Method name="getImageIcon" returnType="ImageIcon" visibility="public">
+          <Argument type="Pictures" name="iconName"/>
+        </Method>
+      </Methods>
+    </Class>
+    <Interface name="IObserver" package="main" visibility="public" xPosition="374.0" yPosition="1909.0">
+      <Methods>
+        <Method name="update" returnType="void" visibility="package">
+          <Argument type="States" name="states"/>
+        </Method>
+      </Methods>
+    </Interface>
+    <Interface name="IMovable" package="model.structure" visibility="public" xPosition="1353.0" yPosition="1352.0">
+      <Methods>
+        <Method name="move" returnType="void" visibility="package">
+          <Argument type="int" name="direction"/>
+        </Method>
+      </Methods>
+    </Interface>
+    <Interface name="IPlayer" package="music" visibility="public" xPosition="1091.0" yPosition="785.0">
+      <Methods>
+        <Method name="play" returnType="void" visibility="package"/>
+        <Method name="stop" returnType="void" visibility="package"/>
+      </Methods>
+    </Interface>
+    <Enum name="States" package="model" visibility="public" xPosition="115.0" yPosition="968.0">
+      <Literals>
+        <Literal name="LevelUpdate"/>
+        <Literal name="GameOver"/>
+      </Literals>
+    </Enum>
+    <Enum name="Names" package="model.structure" visibility="public" xPosition="426.0" yPosition="1270.0">
+      <Literals>
+        <Literal name="Dino"/>
+        <Literal name="AntiDino"/>
+        <Literal name="Large"/>
+        <Literal name="Middle"/>
+        <Literal name="Names"/>
+        <Literal name="Small"/>
+      </Literals>
+    </Enum>
+    <Enum name="Pictures" package="pictures" visibility="public" xPosition="4367.0" yPosition="1242.0">
+      <Literals>
+        <Literal name="Dino"/>
+        <Literal name="AntiDino"/>
+        <Literal name="Large"/>
+        <Literal name="Middle"/>
+        <Literal name="Names"/>
+        <Literal name="Small"/>
+        <Literal name="Desert"/>
+        <Literal name="Menue"/>
+        <Literal name="Normal"/>
+      </Literals>
+    </Enum>
+  </ClassDiagramComponents>
+  <ClassDiagramRelations>
+    <ImplementsRelation name="&lt;&lt;implements&gt;&gt;" source="model.structure.Figures" target="model.structure.IMovable"/>
+    <HasRelation name="imageLoaderInstance" source="pictures.ImageLoader" target="pictures.ImageLoader" type="Aggregation" sourceCardinality="1..1" targetCardinality="1..1"/>
+    <HasRelation name="game" source="main.PausePanel" target="main.Game" type="Aggregation" sourceCardinality="1..1" targetCardinality="1..1"/>
+    <HasRelation name="loader" source="main.PausePanel" target="pictures.ImageLoader" type="Aggregation" sourceCardinality="1..1" targetCardinality="1..1"/>
+    <UseRelation source="model.structure.Figures" target="pictures.Pictures" sourceCardinality="1..1" targetCardinality="1..1"/>
+    <UseRelation source="pictures.ImageLoader" target="pictures.ImageLoader" sourceCardinality="1..1" targetCardinality="1..1"/>
+    <IsRelation name="is" source="model.structure.Middle" target="model.structure.Enemy"/>
+    <HasRelation name="manager" source="main.GameOverPanel" target="model.Manager" type="Aggregation" sourceCardinality="1..1" targetCardinality="1..1"/>
+    <UseRelation source="model.Manager" target="model.structure.Dino" sourceCardinality="1..1" targetCardinality="1..1"/>
+    <IsRelation name="is" source="model.structure.Dino" target="model.structure.Figures"/>
+    <HasRelation name="dino" source="main.GamePanel" target="model.structure.Dino" type="Aggregation" sourceCardinality="1..1" targetCardinality="1..1"/>
+    <UseRelation source="model.Manager" target="model.States" sourceCardinality="1..1" targetCardinality="1..1"/>
+    <HasRelation name="manager" source="main.GamePanel" target="model.Manager" type="Aggregation" sourceCardinality="1..1" targetCardinality="1..1"/>
+    <UseRelation source="main.IObserver" target="model.States" sourceCardinality="1..1" targetCardinality="1..1"/>
+    <HasRelation name="manager" source="main.Game" target="model.Manager" type="Aggregation" sourceCardinality="1..1" targetCardinality="1..1"/>
+    <HasRelation name="enemies" source="model.Manager" target="model.structure.Figures" type="Aggregation" sourceCardinality="1..1" targetCardinality="0..*" collectionType="List&lt;Figures&gt;"/>
+    <UseRelation source="pictures.ImageLoader" target="pictures.Pictures" sourceCardinality="1..1" targetCardinality="1..1"/>
+    <UseRelation source="main.Game" target="music.MP3Player" sourceCardinality="1..1" targetCardinality="1..1"/>
+    <UseRelation source="model.Manager" target="model.Manager" sourceCardinality="1..1" targetCardinality="1..1"/>
+    <UseRelation source="model.Manager" target="main.IObserver" sourceCardinality="1..1" targetCardinality="1..1"/>
+    <HasRelation name="newfig" source="model.structure.FigureFactory" target="model.structure.Figures" type="Aggregation" sourceCardinality="1..1" targetCardinality="1..1"/>
+    <UseRelation source="model.Manager" target="model.structure.Figures" sourceCardinality="1..1" targetCardinality="1..1"/>
+    <UseRelation source="main.GamePanel" target="model.States" sourceCardinality="1..1" targetCardinality="1..1"/>
+    <ImplementsRelation name="&lt;&lt;implements&gt;&gt;" source="music.MP3Player" target="music.IPlayer"/>
+    <HasRelation name="painting" source="main.Game" target="main.GamePanel" type="Aggregation" sourceCardinality="1..1" targetCardinality="1..1"/>
+    <HasRelation name="gameOver" source="main.Game" target="main.GameOverPanel" type="Aggregation" sourceCardinality="1..1" targetCardinality="1..1"/>
+    <HasRelation name="manager" source="model.Manager" target="model.Manager" type="Aggregation" sourceCardinality="1..1" targetCardinality="1..1"/>
+    <HasRelation name="enemies" source="main.GamePanel" target="model.structure.Figures" type="Aggregation" sourceCardinality="1..1" targetCardinality="0..*" collectionType="List&lt;Figures&gt;"/>
+    <UseRelation source="model.structure.FigureFactory" target="model.structure.Names" sourceCardinality="1..1" targetCardinality="1..1"/>
+    <UseRelation source="main.Game" target="model.States" sourceCardinality="1..1" targetCardinality="1..1"/>
+    <HasRelation name="game" source="main.GameOverPanel" target="main.Game" type="Aggregation" sourceCardinality="1..1" targetCardinality="1..1"/>
+    <HasRelation name="manager" source="main.PausePanel" target="model.Manager" type="Aggregation" sourceCardinality="1..1" targetCardinality="1..1"/>
+    <IsRelation name="is" source="model.structure.Large" target="model.structure.Enemy"/>
+    <HasRelation name="dino" source="model.Manager" target="model.structure.Dino" type="Aggregation" sourceCardinality="1..1" targetCardinality="1..1"/>
+    <HasRelation name="observers" source="model.Manager" target="main.IObserver" type="Aggregation" sourceCardinality="1..1" targetCardinality="0..*" collectionType="List&lt;IObserver&gt;"/>
+    <HasRelation name="pause" source="main.Game" target="main.PausePanel" type="Aggregation" sourceCardinality="1..1" targetCardinality="1..1"/>
+    <HasRelation name="loader" source="main.GameOverPanel" target="pictures.ImageLoader" type="Aggregation" sourceCardinality="1..1" targetCardinality="1..1"/>
+    <HasRelation name="figureFactory" source="model.structure.FigureFactory" target="model.structure.FigureFactory" type="Aggregation" sourceCardinality="1..1" targetCardinality="1..1"/>
+    <IsRelation name="is" source="model.structure.AntiDino" target="model.structure.Enemy"/>
+    <HasRelation name="player" source="main.Game" target="music.MP3Player" type="Aggregation" sourceCardinality="1..1" targetCardinality="1..1"/>
+    <IsRelation name="is" source="model.structure.Small" target="model.structure.Enemy"/>
+    <HasRelation name="loader" source="model.Manager" target="pictures.ImageLoader" type="Aggregation" sourceCardinality="1..1" targetCardinality="1..1"/>
+    <HasRelation name="factory" source="model.Manager" target="model.structure.FigureFactory" type="Aggregation" sourceCardinality="1..1" targetCardinality="1..1"/>
+    <UseRelation source="model.structure.FigureFactory" target="model.structure.FigureFactory" sourceCardinality="1..1" targetCardinality="1..1"/>
+    <ImplementsRelation name="&lt;&lt;implements&gt;&gt;" source="main.Game" target="main.IObserver"/>
+    <IsRelation name="is" source="model.structure.Enemy" target="model.structure.Figures"/>
+    <ImplementsRelation name="&lt;&lt;implements&gt;&gt;" source="main.GamePanel" target="main.IObserver"/>
+  </ClassDiagramRelations>
+</ClassDiagram>
