@@ -84,7 +84,7 @@ public class GameOverPanel extends JPanel implements ActionListener{
      */
     @Override
     public void paintComponent(Graphics g) {
-        g.drawImage(loader.getImage(Pictures.Normal), 0, 0, 1500, 1000, null);
+        g.drawImage(this.loader.getImage(Pictures.Normal), 0, 0, 1500, 1000, null);
         g.setColor(Color.RED);
         g.setFont(new Font(Font.MONOSPACED, Font.BOLD, 200));
         g.drawString("GAME OVER", 200, 200);
@@ -100,13 +100,13 @@ public class GameOverPanel extends JPanel implements ActionListener{
          */
     @Override
     public void actionPerformed(ActionEvent e) {
-        if(e.getSource().equals(save)){
+        if(e.getSource().equals(this.save)){
             try{
                 Class.forName("org.sqlite.JDBC");
                 this.connect = DriverManager.getConnection("jdbc:sqlite:Memory.db");
-                this.order = connect.createStatement();
-                String input = "INSERT INTO MEMORY (NAME, LEVEL, SCORE) VALUES ('" + this.name.getText() + "', " + this.manager.getLevel() + ", " + this.manager.getScore() + ")";
-                order.executeUpdate(input);
+                this.order = this.connect.createStatement();
+                this.input = "INSERT INTO MEMORY (NAME, LEVEL, SCORE) VALUES ('" + this.name.getText() + "', " + this.manager.getLevel() + ", " + this.manager.getScore() + ")";
+                this.order.executeUpdate(input);
                 this.game.finish();
             }
             catch(Exception ex){

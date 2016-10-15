@@ -32,7 +32,7 @@ abstract class Enemy extends Figures{
      */
     @Override
     public void move(int direction){
-        rect.x -= velocity;
+        this.rect.x -= velocity;
     }
     
 }

@@ -8,6 +8,7 @@ package main;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import javax.swing.ImageIcon;
+import javax.swing.JFrame;
 import javax.swing.JLabel;
 import music.MP3Player;
 import pictures.ImageLoader;
@@ -17,7 +18,7 @@ import pictures.Pictures;
  * form that contains the instructions
  * @author Paul
  */
-public class Instructions extends javax.swing.JFrame implements ActionListener{
+public class Instructions extends JFrame implements ActionListener{
 
     private pictures.ImageLoader loader;
     private music.MP3Player player;
@@ -27,9 +28,9 @@ public class Instructions extends javax.swing.JFrame implements ActionListener{
      */
     public Instructions() {
         this.loader = ImageLoader.getInstance();
-        this.setContentPane(new JLabel(new ImageIcon(loader.getImage(Pictures.Normal))));
+        this.setContentPane(new JLabel(new ImageIcon(this.loader.getImage(Pictures.Normal))));
         this.setResizable(false);
-        initComponents();
+        this.initComponents();
         this.setSize(1500, 1000);
         this.init();
     }
@@ -272,7 +273,7 @@ public class Instructions extends javax.swing.JFrame implements ActionListener{
      */
     @Override
     public void actionPerformed(ActionEvent e) {
-        if(e.getSource() == this.close){
+        if(e.getSource().equals(this.close)){
             this.player.stop();
             this.setVisible(false);
             Menue menue = new Menue();

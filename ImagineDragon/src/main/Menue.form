@@ -28,8 +28,8 @@
               <Group type="103" groupAlignment="0" attributes="0">
                   <Component id="highscore" pref="586" max="32767" attributes="0"/>
                   <Component id="anleitung" max="32767" attributes="0"/>
-                  <Component id="spielen" max="32767" attributes="0"/>
-                  <Component id="schließen" max="32767" attributes="0"/>
+                  <Component id="play" max="32767" attributes="0"/>
+                  <Component id="close" max="32767" attributes="0"/>
               </Group>
               <EmptySpace min="-2" pref="593" max="-2" attributes="0"/>
           </Group>
@@ -46,20 +46,20 @@
               <EmptySpace min="-2" pref="76" max="-2" attributes="0"/>
               <Component id="jLabel1" min="-2" max="-2" attributes="0"/>
               <EmptySpace pref="147" max="32767" attributes="0"/>
-              <Component id="spielen" min="-2" pref="100" max="-2" attributes="0"/>
+              <Component id="play" min="-2" pref="100" max="-2" attributes="0"/>
               <EmptySpace type="separate" max="-2" attributes="0"/>
               <Component id="anleitung" min="-2" pref="100" max="-2" attributes="0"/>
               <EmptySpace type="separate" max="-2" attributes="0"/>
               <Component id="highscore" min="-2" pref="100" max="-2" attributes="0"/>
               <EmptySpace type="separate" max="-2" attributes="0"/>
-              <Component id="schließen" min="-2" pref="100" max="-2" attributes="0"/>
+              <Component id="close" min="-2" pref="100" max="-2" attributes="0"/>
               <EmptySpace min="-2" pref="116" max="-2" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
   </Layout>
   <SubComponents>
-    <Component class="javax.swing.JButton" name="spielen">
+    <Component class="javax.swing.JButton" name="play">
       <Properties>
         <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
           <Font name="Tahoma" size="36" style="1"/>
@@ -78,7 +78,7 @@
         <Property name="text" type="java.lang.String" value="Anleitung"/>
       </Properties>
     </Component>
-    <Component class="javax.swing.JButton" name="schlie&#xdf;en">
+    <Component class="javax.swing.JButton" name="close">
       <Properties>
         <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
           <Font name="Tahoma" size="36" style="1"/>

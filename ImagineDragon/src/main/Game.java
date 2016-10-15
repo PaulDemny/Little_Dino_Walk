@@ -8,6 +8,7 @@ package main;
 import java.awt.BorderLayout;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
+import javax.swing.JFrame;
 import model.Manager;
 import model.States;
 import music.MP3Player;
@@ -17,7 +18,7 @@ import music.MP3Player;
  * form and controller
  * @author Paul
  */
-public class Game extends javax.swing.JFrame implements IObserver{
+public class Game extends JFrame implements IObserver{
 
     private Manager manager;
     private MP3Player player;
@@ -38,7 +39,7 @@ public class Game extends javax.swing.JFrame implements IObserver{
      */
     public Game() {
         this.manager = Manager.getInstance();
-        manager.init();
+        this.manager.init();
         this.manager.start();
         this.manager.attach(this);
         this.setUndecorated(true);
@@ -51,7 +52,7 @@ public class Game extends javax.swing.JFrame implements IObserver{
         this.painting = new GamePanel();
         this.pause = new PausePanel(this);
         this.gameOver = new GameOverPanel(this);
-        this.getContentPane().add(painting, BorderLayout.CENTER);
+        this.getContentPane().add(this.painting, BorderLayout.CENTER);
         this.player = new MP3Player("music/files/Miles.mp3");
         this.player.play();
         this.addKeyListener(new KeyAdapter(){
@@ -115,8 +116,6 @@ public class Game extends javax.swing.JFrame implements IObserver{
                     manager.quitJump();
                 }
             }
-            
-            
         });
         
     }
@@ -126,11 +125,11 @@ public class Game extends javax.swing.JFrame implements IObserver{
      */
     public void killPause(){
         this.setFocusable(true);
-        player.stop();
+        this.player.stop();
         this.player = new MP3Player("music/files/Miles.mp3");
         this.player.play();
-        getContentPane().removeAll();
-        getContentPane().add(painting, BorderLayout.CENTER);
+        this.getContentPane().removeAll();
+        this.getContentPane().add(this.painting, BorderLayout.CENTER);
         this.setFocusable(true);
         this.manager.start();
         this.painting.startTimer();
@@ -142,7 +141,7 @@ public class Game extends javax.swing.JFrame implements IObserver{
      * @return the player instance
      */
     public MP3Player getPlayer(){
-        return player;
+        return this.player;
     }
     
     /**
@@ -164,11 +163,11 @@ public class Game extends javax.swing.JFrame implements IObserver{
     public void showGameOver(){
         player.stop();
         painting.stopTimer();
-        getContentPane().removeAll();
-        getContentPane().add(gameOver, BorderLayout.CENTER);
-        player = new MP3Player("music/files/Watchmen.mp3");
-        player.play();
-        repaint();
+        this.getContentPane().removeAll();
+        this.getContentPane().add(gameOver, BorderLayout.CENTER);
+        this.player = new MP3Player("music/files/Watchmen.mp3");
+        this.player.play();
+        this.repaint();
     }
 
     /**

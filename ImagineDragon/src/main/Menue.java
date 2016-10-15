@@ -8,19 +8,22 @@ package main;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import javax.swing.ImageIcon;
+import javax.swing.JFrame;
 import javax.swing.JLabel;
+import music.MP3Player;
+import pictures.ImageLoader;
 import pictures.Pictures;
 
 /**
  * Main menue
  * @author Paul
  */
-public class Menue extends javax.swing.JFrame implements ActionListener{
+public class Menue extends JFrame implements ActionListener{
 
     private ImageIcon icon;
     private JLabel dino;
-    private music.MP3Player player;
-    private pictures.ImageLoader loader;
+    private MP3Player player;
+    private ImageLoader loader;
     
     /**
      * Creates new form Menue
@@ -30,7 +33,7 @@ public class Menue extends javax.swing.JFrame implements ActionListener{
         this.setUndecorated(true);
         this.setSize(1500, 1000);
         this.setResizable(false);
-        this.setContentPane(new JLabel(new ImageIcon(loader.getImage(Pictures.Normal))));
+        this.setContentPane(new JLabel(new ImageIcon(this.loader.getImage(Pictures.Normal))));
         this.initComponents();
         this.init();
     }
@@ -44,22 +47,22 @@ public class Menue extends javax.swing.JFrame implements ActionListener{
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        spielen = new javax.swing.JButton();
+        play = new javax.swing.JButton();
         anleitung = new javax.swing.JButton();
-        schließen = new javax.swing.JButton();
+        close = new javax.swing.JButton();
         highscore = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        spielen.setFont(new java.awt.Font("Tahoma", 1, 36)); // NOI18N
-        spielen.setText("Spielen");
+        play.setFont(new java.awt.Font("Tahoma", 1, 36)); // NOI18N
+        play.setText("Spielen");
 
         anleitung.setFont(new java.awt.Font("Tahoma", 1, 36)); // NOI18N
         anleitung.setText("Anleitung");
 
-        schließen.setFont(new java.awt.Font("Tahoma", 1, 36)); // NOI18N
-        schließen.setText("Schließen");
+        close.setFont(new java.awt.Font("Tahoma", 1, 36)); // NOI18N
+        close.setText("Schließen");
 
         highscore.setFont(new java.awt.Font("Tahoma", 1, 36)); // NOI18N
         highscore.setText("Highscore");
@@ -77,8 +80,8 @@ public class Menue extends javax.swing.JFrame implements ActionListener{
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(highscore, javax.swing.GroupLayout.DEFAULT_SIZE, 586, Short.MAX_VALUE)
                     .addComponent(anleitung, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(spielen, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(schließen, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(play, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(close, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addGap(593, 593, 593))
             .addGroup(layout.createSequentialGroup()
                 .addGap(30, 30, 30)
@@ -91,17 +94,17 @@ public class Menue extends javax.swing.JFrame implements ActionListener{
                 .addGap(76, 76, 76)
                 .addComponent(jLabel1)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 147, Short.MAX_VALUE)
-                .addComponent(spielen, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(play, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(anleitung, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(highscore, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
-                .addComponent(schließen, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(close, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(116, 116, 116))
         );
 
-        spielen.getAccessibleContext().setAccessibleDescription("");
+        play.getAccessibleContext().setAccessibleDescription("");
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -111,19 +114,19 @@ public class Menue extends javax.swing.JFrame implements ActionListener{
      */
     public void init(){
         this.loader = pictures.ImageLoader.getInstance();
-        icon = loader.getImageIcon(Pictures.Menue);
-        dino = new JLabel(icon);
-        dino.setBounds(100, 500, icon.getIconWidth(), icon.getIconHeight());
-        this.add(dino);
-        dino = new JLabel(icon);
-        dino.setBounds(this.getWidth() - icon.getIconWidth() - 100, 500, icon.getIconWidth(), icon.getIconHeight());
-        this.add(dino);
-        player = new music.MP3Player("music/files/Stuck.mp3");
-        player.play();
-        this.spielen.addActionListener(this);
+        this.icon = this.loader.getImageIcon(Pictures.Menue);
+        this.dino = new JLabel(icon);
+        this.dino.setBounds(100, 500, this.icon.getIconWidth(), this.icon.getIconHeight());
+        this.add(this.dino);
+        this.dino = new JLabel(icon);
+        this.dino.setBounds(this.getWidth() - this.icon.getIconWidth() - 100, 500, this.icon.getIconWidth(), this.icon.getIconHeight());
+        this.add(this.dino);
+        this.player = new music.MP3Player("music/files/Stuck.mp3");
+        this.player.play();
+        this.play.addActionListener(this);
         this.anleitung.addActionListener(this);
         this.highscore.addActionListener(this);
-        this.schließen.addActionListener(this);
+        this.close.addActionListener(this);
     }
     /**
      * @param args the command line arguments
@@ -160,10 +163,10 @@ public class Menue extends javax.swing.JFrame implements ActionListener{
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton anleitung;
+    private javax.swing.JButton close;
     private javax.swing.JButton highscore;
     private javax.swing.JLabel jLabel1;
-    private javax.swing.JButton schließen;
-    private javax.swing.JButton spielen;
+    private javax.swing.JButton play;
     // End of variables declaration//GEN-END:variables
 
     /**
@@ -172,29 +175,29 @@ public class Menue extends javax.swing.JFrame implements ActionListener{
      */
     @Override
     public void actionPerformed(ActionEvent e) {
-        if (e.getSource().equals(anleitung)){
+        if (e.getSource().equals(this.anleitung)){
             Instructions anleitung = new Instructions();
-            player.stop();
+            this.player.stop();
             this.setVisible(false);
             anleitung.setVisible(true);
         }
         
-        if (e.getSource().equals(spielen)){
-            player.stop();
+        if (e.getSource().equals(this.play)){
+            this.player.stop();
             this.setVisible(false);
             Game game = new Game();
             game.setVisible(true);
         }
         
-        if (e.getSource().equals(highscore)){
+        if (e.getSource().equals(this.highscore)){
             Highscore score = new Highscore();
-            player.stop();
+            this.player.stop();
             this.setVisible(false);
             score.setVisible(true);
         }
         
-        if (e.getSource().equals(schließen)){
-            player.stop();
+        if (e.getSource().equals(this.close)){
+            this.player.stop();
             this.setVisible(false);
             System.exit(0);
         }

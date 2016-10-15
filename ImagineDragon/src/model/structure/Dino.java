@@ -25,10 +25,10 @@ public class Dino extends Figures{
      */
     public Dino(Rectangle rect, pictures.Pictures img) {
         super(rect, img);
-        this.dinoVelocity = 0;
-        this.movement = true;
+        this.dinoVelocity    = 0;
+        this.movement        = true;
         this.startDino();
-        this.zenit = false;
+        this.zenit           = false;
     }
 
     /**
@@ -80,7 +80,7 @@ public class Dino extends Figures{
             }
             
         };
-        jump.start();
+        this.jump.start();
         this.zenit = false;
     }
     

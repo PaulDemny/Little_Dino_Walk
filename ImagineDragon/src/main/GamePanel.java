@@ -71,11 +71,11 @@ public class GamePanel extends JPanel implements ActionListener, IObserver{
         this.dino = this.manager.getDino();
         this.enemies = this.manager.getEnemies();
         plainMdl.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
-        plainMdl.drawImage(loader.getImage(Pictures.Desert), manager.getBackRect().x, manager.getBackRect().y, null);
-        icon = loader.getImageIcon(Pictures.Dino);
-        icon.paintIcon(this, plainMdl, dino.getRect().x - 70, dino.getRect().y);
-        for (int i = 0; i < enemies.size(); i++){
-            plainMdl.drawImage(loader.getImage(enemies.get(i).getImage()), enemies.get(i).getRect().x, enemies.get(i).getRect().y, null);
+        plainMdl.drawImage(this.loader.getImage(Pictures.Desert), this.manager.getBackRect().x, this.manager.getBackRect().y, null);
+        this.icon = this.loader.getImageIcon(Pictures.Dino);
+        this.icon.paintIcon(this, plainMdl, this.dino.getRect().x - 70, this.dino.getRect().y);
+        for (int i = 0; i < this.enemies.size(); i++){
+            plainMdl.drawImage(this.loader.getImage(this.enemies.get(i).getImage()), this.enemies.get(i).getRect().x, this.enemies.get(i).getRect().y, null);
         }
         plainMdl.setFont(new Font(Font.MONOSPACED, Font.BOLD, 50));
         plainMdl.setColor(Color.red);
@@ -87,8 +87,8 @@ public class GamePanel extends JPanel implements ActionListener, IObserver{
      * stops the rendering loop
      */
     public void stopTimer(){
-        if(gameTime.isRunning()){
-            gameTime.stop();
+        if(this.gameTime.isRunning()){
+            this.gameTime.stop();
         }
     }
     
@@ -96,8 +96,8 @@ public class GamePanel extends JPanel implements ActionListener, IObserver{
      * starts the rendering loop
      */
     public void startTimer(){
-        if (!gameTime.isRunning()){
-            gameTime.start();
+        if (!this.gameTime.isRunning()){
+            this.gameTime.start();
         }
     }
     
@@ -107,7 +107,7 @@ public class GamePanel extends JPanel implements ActionListener, IObserver{
      */
     @Override
     public void actionPerformed(ActionEvent e) {
-        repaint();
+        this.repaint();
     }
 
     /**
@@ -116,7 +116,7 @@ public class GamePanel extends JPanel implements ActionListener, IObserver{
      */
     @Override
     public void update(Graphics g) {
-        paint(g);
+        this.paint(g);
     }
 
     /**

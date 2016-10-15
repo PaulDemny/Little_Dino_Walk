@@ -31,7 +31,7 @@ public abstract class Figures implements IMovable{
      * @return image flag
      */
     public pictures.Pictures getImage(){
-        return img;
+        return this.img;
     }
 
     /**
@@ -39,7 +39,7 @@ public abstract class Figures implements IMovable{
      * @return rectangle of the abstract layer
      */
     public Rectangle getRect(){
-        return rect;
+        return this.rect;
     }
 
     /**

@@ -77,27 +77,27 @@ public class ImageLoader {
         switch(imageName){
 
             case Desert:
-                imageInstance = background;
+                imageInstance = this.background;
                 break;
             
             case Large:
-                imageInstance = large;
+                imageInstance = this.large;
                 break;
              
             case Middle:
-                imageInstance = middle;
+                imageInstance = this.middle;
                 break;
               
             case Small:
-                imageInstance = small;
+                imageInstance = this.small;
                 break;
                 
             case Normal:
-                imageInstance = normal;
+                imageInstance = this.normal;
                 break;
                 
             case AntiDino:
-                imageInstance = antiDino;
+                imageInstance = this.antiDino;
                 break;
         }
         
@@ -116,11 +116,11 @@ public class ImageLoader {
         switch(iconName){
             
             case Menue:
-                iconInstance = roar;
+                iconInstance = this.roar;
                 break;
                 
             case Dino:
-                iconInstance = dino;
+                iconInstance = this.dino;
                 break;
                 
         }

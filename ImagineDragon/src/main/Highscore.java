@@ -16,13 +16,14 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.Statement;
 import java.sql.ResultSet;
+import javax.swing.JFrame;
 import music.MP3Player;
 
 /**
  * Form that showa the highscore
  * @author Paul
  */
-public class Highscore extends javax.swing.JFrame implements ActionListener{
+public class Highscore extends JFrame implements ActionListener{
     
     private pictures.ImageLoader loader;
     private music.MP3Player player;
@@ -39,7 +40,7 @@ public class Highscore extends javax.swing.JFrame implements ActionListener{
     public Highscore(){
         this.setUndecorated(true);
         this.loader = ImageLoader.getInstance();
-        this.setContentPane(new JLabel(new ImageIcon(loader.getImage(Pictures.Normal))));
+        this.setContentPane(new JLabel(new ImageIcon(this.loader.getImage(Pictures.Normal))));
         this.initComponents();
         this.init();
     }
@@ -62,9 +63,9 @@ public class Highscore extends javax.swing.JFrame implements ActionListener{
         try{
             Class.forName("org.sqlite.JDBC");
             this.connect = DriverManager.getConnection("jdbc:sqlite:Memory.db");
-            this.order = connect.createStatement();
+            this.order = this.connect.createStatement();
             this.statement = "SELECT * FROM Memory order by Score desc";
-            this.result = order.executeQuery(statement);
+            this.result = this.order.executeQuery(statement);
             while (this.result.next()){
                 this.output += String.valueOf(this.place) + ". "+ this.result.getString("Name") + "   Level:" + String.valueOf(this.result.getInt("Level")) + "   Score:" + String.valueOf(this.result.getInt("Score") + "<br>");     
                 if (this.place > 9){
@@ -73,10 +74,9 @@ public class Highscore extends javax.swing.JFrame implements ActionListener{
                 this.place++;
             }
             this.output = this.output.concat("</html>");
-            highscoreView.setLocation(750, 100);
-            
-            highscoreView.setFont(new Font(Font.MONOSPACED, Font.BOLD, 45));
-            this.highscoreView.setText(output);
+            this.highscoreView.setLocation(750, 100);
+            this.highscoreView.setFont(new Font(Font.MONOSPACED, Font.BOLD, 45));
+            this.highscoreView.setText(this.output);
         }   
         catch (Exception ex) {
             System.out.println(ex.getMessage());
@@ -188,7 +188,7 @@ public class Highscore extends javax.swing.JFrame implements ActionListener{
      */
     @Override
     public void actionPerformed(ActionEvent e) {
-        if(e.getSource() == this.close){
+        if(e.getSource().equals(this.close)){
             this.player.stop();
             this.setVisible(false);
             Menue menue = new Menue();

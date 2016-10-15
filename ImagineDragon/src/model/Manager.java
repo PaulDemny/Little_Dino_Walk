@@ -63,7 +63,7 @@ public class Manager{
         this.level           = 20;
         this.levelIncrement  = 0;
         this.score           = 0;
-        this.dino            = (Dino) factory.factFigure(Names.Names.Dino, this.gameVelocity);
+        this.dino            = (Dino) this.factory.factFigure(Names.Names.Dino, this.gameVelocity);
         this.delayJump       = new Timer();
         this.enemies         = new ArrayList <>();
         this.observers       = new ArrayList <>();
@@ -120,7 +120,7 @@ public class Manager{
      */
     private void factEnemies(){
         this.raiseLevelCheck();
-        switch(rnd.nextInt(3)){
+        switch(this.rnd.nextInt(3)){
             case 0:
                 this.addSmall();
                 break;
@@ -149,7 +149,7 @@ public class Manager{
     private void addSmall(){
         switch(this.rnd.nextInt(10)){
             case 0: case 2: case 4: case 6:case 8:
-                enemies.add(factory.factFigure(Names.Small, this.gameVelocity));
+                this.enemies.add(this.factory.factFigure(Names.Small, this.gameVelocity));
                 break;
         }
     }
@@ -158,7 +158,7 @@ public class Manager{
      * produces a middle enemy
      */
     private void addMiddle(){
-            switch(rnd.nextInt(20)){
+            switch(this.rnd.nextInt(20)){
                 case 0: case 5: case 10: case 15: case 19:
                     this.enemies.add(this.factory.factFigure(Names.Middle, this.gameVelocity));
                     break;
@@ -169,7 +169,7 @@ public class Manager{
      * produces a large enemy
      */
     private void addLarge(){
-        switch(rnd.nextInt(30)){
+        switch(this.rnd.nextInt(30)){
             case 0: case 5: case 10: case 15: case 20: case 25:
                     this.enemies.add(this.factory.factFigure(Names.Large, this.gameVelocity));
                     break;
@@ -177,7 +177,7 @@ public class Manager{
     }
     
     private void addAntiDino(){
-        switch(rnd.nextInt(30)){
+        switch(this.rnd.nextInt(30)){
             case 0: case 5: case 10: case 15: case 20: case 25:
                     this.enemies.add(this.factory.factFigure(Names.AntiDino, this.gameVelocity + 2));
                     break;
@@ -276,7 +276,7 @@ public class Manager{
      */
     private boolean kolission(){
         boolean kollission = false;
-        for (int i = 0; i < enemies.size(); i++){
+        for (int i = 0; i < this.enemies.size(); i++){
             if(this.enemies.get(i).getRect().intersects(this.dino.getRect())){
                 kollission = true;
             }

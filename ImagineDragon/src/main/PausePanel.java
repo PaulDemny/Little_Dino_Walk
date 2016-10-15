@@ -49,12 +49,12 @@ public class PausePanel extends JPanel implements ActionListener{
         this.resume.setFont(new Font(Font.MONOSPACED, Font.BOLD, 50));
         this.resume.setBounds(150, 700, 500, 200);
         this.resume.addActionListener(this);
-        this.add(resume);
+        this.add(this.resume);
         this.end = new JButton("Finish Game");
         this.end.setFont(new Font(Font.MONOSPACED, Font.BOLD, 50));
         this.end.setBounds(800, 700, 500, 200);
         this.end.addActionListener(this);
-        this.add(end);
+        this.add(this.end);
     }
 
     /**
@@ -63,7 +63,7 @@ public class PausePanel extends JPanel implements ActionListener{
      */
     @Override
     public void paintComponent(Graphics g) {
-        g.drawImage(loader.getImage(Pictures.Normal), 0, 0, 1500, 1000, null);
+        g.drawImage(this.loader.getImage(Pictures.Normal), 0, 0, 1500, 1000, null);
         g.setColor(Color.RED);
         g.setFont(new Font(Font.MONOSPACED, Font.BOLD, 200));
         g.drawString("PAUSE", 470, 200);
@@ -77,13 +77,13 @@ public class PausePanel extends JPanel implements ActionListener{
      */
     @Override
     public void actionPerformed(ActionEvent e) {
-        if(e.getSource().equals(resume)){
+        if(e.getSource().equals(this.resume)){
             this.setFocusable(false);
-            game.killPause();
+            this.game.killPause();
         }
         
-        if(e.getSource().equals(end)){
-            game.finish();
+        if(e.getSource().equals(this.end)){
+            this.game.finish();
         }
     }
 }
